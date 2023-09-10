@@ -1,0 +1,62 @@
+---@meta
+---@diagnostic disable
+
+
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra)
+---@class MathExtra
+---Returns x clamped to min and max boundaries.\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#clamp)
+---@field clamp fun(x: numbers, min: numbers, max: number): clamped: number
+---Returns the length of the diagonal of an n-dimensional box (or the length of an n-component vector).\
+---Rather quick method that does not handle intermediate overflows/underflows nor is made for numerical stability.\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#diag)
+---@field diag fun(...: number): diagonal: number
+---Returns [erf](https://en.wikipedia.org/wiki/Error_function)(x).\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#erf)
+---@field erf fun(x: number): erf: number
+---Returns the length of hypotenuse of right angle triangle with sides x and y, equivalent to sqrt(x*x + y*y), but has better numerical stability and internally handles intermediate overflows/underflows, but is also slower.\
+---return: number sqrt(x*x+y*y)\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#hypot)
+---@field hypot fun(x: numbers, y: number): number
+---Returns linear interpolation between x and y with ratio a (x+(y-x)*a).\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#mix)
+---@field mix fun(x: number, y: number, a: number): number
+---Returns x rounded to n decimals, if n is omitted or <=0, rounds to nearest integer.\
+---Note that Spring's Lua interpreter uses 32-bit floats for all numbers so max. precision is ~7 decimal digits.\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#round)
+---@field round fun(x: number, decimals: number): rounded: number
+---Returns 0 if x ==0, 1 if x > 0, -1 if x < 0 [sgn](http://en.wikipedia.org/wiki/Sign_function)(x).\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#sgn)
+---@field sgn fun(x: number): sign: number
+---Returns [smoothstep](http://en.wikipedia.org/wiki/Smoothstep)(edge0, edge1, v).\
+---Not available for LuaMenu, LuaIntro, LuaParser\
+---New in Engine Version 0.95 and up.
+---
+---[View documents](https://springrts.com/wiki/Lua_MathExtra#smoothstep)
+---@field smoothstep fun(edge0: number, edge1: number, x: number): smoothstep: number
+
+
+---@class mathlib: MathExtra

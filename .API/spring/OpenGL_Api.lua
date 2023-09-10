@@ -1,0 +1,255 @@
+---@meta
+---@diagnostic disable
+
+
+---Not available for LuaParser, LuaRules/Gaia (synced).\
+---Some functions are removed for LuaMenu, LuaIntro.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api)
+---@class OpenGL_Api
+---Returns X,Y,Z or R,G,B.\
+---Not available for LuaParser,	LuaRules/Gaia (synced).
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#GetSun)
+---@field GetSun fun(): x:number, y:number, z:number
+---@field GetSun fun(pos: string): x:number, y:number, z:number
+---@field GetSun fun(light: GetSun.light, unit: string): r:number?, g:number?, b:number?
+---See [Spring.SetAtmosphere](https://springrts.com/wiki/Lua_UnsyncedCtrl#Sun) for details.
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---New in version 101.0
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#GetAtmosphere)
+---@field GetAtmosphere fun(name: string): r: number, g: number, b: number
+---See [Spring.SetWaterParams](https://springrts.com/wiki/Lua_UnsyncedCtrl#Developers) for details.
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---New in version 104.0
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#GetWaterRendering)
+---@field GetWaterRendering fun(name: string): number|string|bool?, g: number?, b: number?
+---See [Spring.SetMapRenderingParams](https://springrts.com/wiki/Lua_UnsyncedCtrl#Developers) for details.
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---New in version 104.0
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#GetMapRendering)
+---@field GetMapRendering fun(name: string): number|bool?, g: number?, b: number?
+---Used for Unit LODs.
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#ConfigScreen)
+---@field ConfigScreen fun(screenWidth: uint, screenDistance: uint)
+---transform is true by default.
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#DrawMiniMap)
+---@field DrawMiniMap fun(transform: boolean?)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#SlaveMiniMap)
+---@field SlaveMiniMap fun(mode: boolean)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#ConfigMiniMap)
+---@field ConfigMiniMap fun(intPX: number, intPY: number, intSX: number, intSY: number)
+---Returns x, y
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#GetViewSizes)
+---@field GetViewSizes fun(): number, number
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Viewport)
+---@field Viewport fun(x: number, y: number, w: number, h: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#PushMatrix)
+---@field PushMatrix fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#PopMatrix)
+---@field PopMatrix fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Translate)
+---@field Translate fun(x: number, y: number, z: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Scale)
+---@field Scale fun(x: number, y: number, z: number)
+---@field Scale fun(angle: number, x: number, y: number, z: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---Use this to draw 2d primitives in DrawWorld().
+---```
+---To render a 2D billboarded quad in the gameworld at world position x,y,z, you do the following (at a minimum; I am skipping blending / depthtesting) here:
+---	gl.PushMatrix()
+---	gl.Texture(read what you need here)
+---	gl.Translate(x,y,z)
+---	gl.Billboard()
+---	gl.TexRect(x1,y1,x2,y2)
+---	gl.PopMatrix()
+---```
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Billboard)
+---@field Billboard fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#MatrixMode)
+---@field MatrixMode fun(mode: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#LoadIdentity)
+---@field LoadIdentity fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#LoadMatrix)
+---@field LoadMatrix fun(name: string)
+---@field LoadMatrix fun(n1: number, n2: number, n3: number, n4: number, n5: number, n6: number, n7: number, n8: number, n9: number, n10: number, n11: number, n12: number, n13: number, n14: number, n15: number, n16: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---WARNING: wrong information
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#MultMatrix)
+---@field MultMatrix fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Ortho)
+---@field Ortho fun(left: number, right: number, bottom: number, top: number, near: number, far: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Frustum)
+---@field Frustum fun(left: number, right: number, bottom: number, top: number, near: number, far: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---WARNING: wrong information
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#PushPopMatrix)
+---@field PushPopMatrix fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#ClipPlane)
+---@field ClipPlane fun(intPlane: ClipPlane.intPlane, enable: boolean)
+---@field ClipPlane fun(intPlane: ClipPlane.intPlane, A: number, B: number, C: number, D: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---```
+---gl.Clear ( GL.DEPTH_BUFFER_BIT [, number cleardepth ] )
+---gl.Clear ( GL.STENCIL_BUFFER_BIT [, number intClearStencil ] )
+---gl.Clear ( GL.COLOR_BUFFER_BIT | GL.ACCUM_BUFFER_BIT [, number r, number g, number b, number a ] )
+---```
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Clear)
+---@field Clear fun(bit: glClearBit)
+---@field Clear fun(bit: glClearBit, cleardepth: number?)
+---@field Clear fun(bit: glClearBit, intClearStencil: number?)
+---@field Clear fun(bit: glClearBit, r: number, g: number, b: number, a: number)
+---Available for LuaMenu only.\
+---New in version 104.0
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#SwapBuffers)
+---@field SwapBuffers fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---DON'T USE IT UNLESS YOU KNOW WHAT YOU ARE DOING!\
+---Each call-in has different default states,\
+---but this function resets all states to the states below no matter what!
+---```
+---	ShadeModel = GL.SMOOTH
+---	Scissor    = false
+---	Texture    = false
+---	Lighting   = false,
+---	ColorMask  = true, true, true, true
+---	DepthMask  = false
+---	DepthTest  = false  (GL.LEQUAL)
+---	Culling    = false  (GL.BACK)
+---	LogicOp    = false  (GL.INVERT)
+---	AlphaTest  = false  (GL.GREATER, 0.5f)
+---	Blending   = true (GL.SRC_ALPHA, GL.ONE_MINUS_SRC_ALPHA)
+---```
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#ResetState)
+---@field ResetState fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---Resets GL.TEXTURE matrix stack\
+---Resets GL.MODELVIEW matrix stack\
+---Resets GL.PROJECTION matrix stack
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#ResetMatrices)
+---@field ResetMatrices fun()
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#BeginEnd)
+---@field BeginEnd fun(GLType: glDrawingPrimitive, func: function, ...: any?)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Color)
+---@field Color fun(r: number, g: number, b: number, a: number?)
+---@field Color fun(color: color)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Vertex)
+---@field Vertex fun(x: number, y: number, z: number?, w: number?)
+---@field Vertex fun(vertex: Vertex.vertex)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Normal)
+---@field Normal fun(x: number, y: number, z: number)
+---@field Normal fun(vertex: Normal.normal)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#EdgeFlag)
+---@field EdgeFlag fun(enable: boolean)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Rect)
+---@field Rect fun(x1: number, y1: number, x2: number, y2: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---Texture rect.
+---WARNING: probably wrong parameters
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#TexRect)
+---@field TexRect fun(x1: number, y1: number, x2: number, y2: number, flip_s: boolean, flip_t: boolean)
+---@field TexRect fun(x1: number, y1: number, x2: number, y2: number, s1: number, t1: number, s2: number, t2: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Shape)
+---@field Shape fun(GLtype: glDrawingPrimitive, elements: Shape.element[])
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#SecondaryColor)
+---@field SecondaryColor fun(color: rgb)
+---@field SecondaryColor fun(r: number, g: number, b: number)
+---Available for LuaRules/Gaia (unsynced), LuaUI only.
+---
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#FogCoord)
+---@field FogCoord fun(value: number)
+
+
+---@class Shape.element.0
+---@field v XYZ
+---@field n XYZ?
+---@field t XY?
+---@field c color.2?
+
+---@class Shape.element.1
+---@field vertex XYZ
+---@field normal XYZ?
+---@field texcoord XY?
+---@field color color.2?
+
+---@alias Shape.element Shape.element.0|Shape.element.1
+
+
+---@class Normal.normal
+---@field x number
+---@field y number
+---@field z number
+
+
+---@class Vertex.vertex
+---@field x number
+---@field y number
+---@field z number?
+---@field w number?
+
+---@alias ClipPlane.intPlane 1|2
+
+---@alias GetSun.light
+---| "shadowDensity"
+---| "diffuse"
+---| "ambient"
+---| "specular"

@@ -1,0 +1,294 @@
+---@meta
+---@diagnostic disable
+
+
+---Not available for LuaMenu and LuaParser
+---Do not modify tables provided by the engine - like Game. Many of them are internally implemented as engine calls.
+---
+---[View documents](https://springrts.com/wiki/Lua_ConstGame)
+---@class ConstGame
+---Deprecated by 104.0 Now in [Lua_ConstEngine](https://springrts.com/wiki/Lua_ConstEngine#Engine.version)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.version)
+---@field version string?
+---Deprecated by 104.0 Now in [Lua_ConstEngine](https://springrts.com/wiki/Lua_ConstEngine#Engine.buildFlags)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.buildFlags)
+---@field buildFlags string?
+--- Replaced in 89.0 with GameID(gameID: string) synced callin
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameID)
+---@field gameID number?
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.maxUnits)
+---@field maxUnits number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.maxTeams)
+---@field maxTeams number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.maxPlayers)
+---@field maxPlayers number
+---Divide Game.mapSizeX or Game.mapSizeZ by this to get engine's "mapDims" coordinates
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.squareSize)
+---@field squareSize number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameSpeed)
+---@field gameSpeed number
+--- Deprecated by 83.x
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameMode)
+---@field gameMode number?
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.startPosType)
+---@field startPosType number
+--- Deprecated by 83.x
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.commEnds)
+---@field commEnds boolean?
+--- Deprecated by 83.x
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.limitDGun)
+---@field limitDGun boolean?
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapChecksum)
+---@field mapChecksum string
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.modChecksum)
+---@field modChecksum string
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapDamage)
+---@field mapDamage boolean
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapName)
+---@field mapName string
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapDescription)
+---@field mapDescription string
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapDescription)
+---@field mapHumanName string
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapHardness)
+---@field mapHardness number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapX)
+---@field mapX integer
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapY)
+---@field mapY integer
+---in worldspace/opengl coords. Divide by Game.squareSize to get engine's "mapDims" coordinates
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapSizeX)
+---@field mapSizeX integer
+---in worldspace/opengl coords. Divide by Game.squareSize to get engine's "mapDims" coordinates
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.mapSizeY)
+---@field mapSizeY integer
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gravity)
+---@field gravity float
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.tidal)
+---@field tidal number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.windMin)
+---@field windMin number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.windMax)
+---@field windMax number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.extractorRadius)
+---@field extractorRadius number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterDamage)
+---@field waterDamage number
+---New in version 104.0
+---Containing {def}IDs of environmental-damage sources
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.envDamageTypes)
+---@field envDamageTypes table?
+---New in version 95.0
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameName)
+---@field gameName string?
+---New in version 95.0
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameShortName)
+---@field gameShortName string?
+---New in version 95.0
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameVersion)
+---@field gameVersion string?
+---New in version 95.0
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameMutator)
+---@field gameMutator string?
+---New in version 95.0
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.gameDesc)
+---@field gameDesc string?
+---Deprecated (it is in contrast to gameName appended with gameVersion!)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.modName)
+---@field modName string
+---Deprecated [View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.modShortName)
+---@field modShortName string
+---Deprecated [View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.modVersion)
+---@field modVersion string
+---Deprecated [View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.modMutator)
+---@field modMutator string
+---Deprecated [View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.modDesc)
+---@field modDesc string
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.allowTeamColors)
+---@field allowTeamColors boolean
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.requireSonarUnderWater)
+---@field requireSonarUnderWater boolean
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.transportAir)
+---@field transportAir number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.transportShip)
+---@field transportShip number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.transportHover)
+---@field transportHover number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.transportGround)
+---@field transportGround number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.fireAtKilled)
+---@field fireAtKilled number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.fireAtCrashing)
+---@field fireAtCrashing number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.constructionDecay)
+---@field constructionDecay boolean
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimAllowEnemies)
+---@field reclaimAllowEnemies boolean
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimAllowAllies)
+---@field reclaimAllowAllies boolean
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.constructionDecayTime)
+---@field constructionDecayTime number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.constructionDecaySpeed)
+---@field constructionDecaySpeed number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.multiReclaim)
+---@field multiReclaim number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimMethod)
+---@field reclaimMethod number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimUnitMethod)
+---@field reclaimUnitMethod number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimUnitEnergyCostFactor)
+---@field reclaimUnitEnergyCostFactor number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimUnitEfficiency)
+---@field reclaimUnitEfficiency number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.reclaimFeatureEnergyCostFactor)
+---@field reclaimFeatureEnergyCostFactor number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.repairEnergyCostFactor)
+---@field repairEnergyCostFactor number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.resurrectEnergyCostFactor)
+---@field resurrectEnergyCostFactor number
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.captureEnergyCostFactor)
+---@field captureEnergyCostFactor number
+--- ### Example
+---```lua
+--- {
+---   ["vtol"]         = 0,  ["special"]      = 1,  ["noweapon"]     = 2,
+---   ["notair"]       = 3,  ["notsub"]       = 4,  ["all"]          = 5,
+---   ["weapon"]       = 6,  ["notship"]      = 7,  ["notland"]      = 8,
+---   ["mobile"]       = 9,  ["kbot"]         = 10, ["antigator"]    = 11,
+---   ["tank"]         = 12, ["plant"]        = 13, ["ship"]         = 14,
+---   ["antiemg"]      = 15, ["antilaser"]    = 16, ["antiflame"]    = 17,
+---   ["underwater"]   = 18, ["hover"]        = 19, ["phib"]         = 20,
+---   ["constr"]       = 21, ["strategic"]    = 22, ["commander"]    = 23,
+---   ["paral"]        = 24, ["jam"]          = 25, ["mine"]         = 26,
+---   ["kamikaze"]     = 27, ["minelayer"]    = 28, ["notstructure"] = 29,
+---   ["air"]          = 30
+--- }
+---```
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.springCategories)
+---@field springCategories table<string, number>
+--- ### Example
+---```lua
+--- {
+---	[1]  = "amphibious",   [2] = "anniddm",     [3] = "antibomber",
+---	[4]  = "antifighter",  [5] = "antiraider",  [6] = "atl",
+---	[7]  = "blackhydra",   [8] = "bombers",     [9] = "commanders",
+---	[10] = "crawlingbombs", ...
+---```
+--- ### Example
+---```lua
+--- {
+---	["amphibious"]   = 1, ["anniddm"]    = 2, ["antibomber"] = 3
+---	["antifighter"]  = 4, ["antiraider"] = 5, ["atl"]        = 6
+---	["blackhydra"]   = 7, ["bombers"]    = 8, ["commanders"] = 9
+---	["crawlingbombs"]= 10, ...
+---```
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.armorTypes)
+---@field armorTypes table<number, string>|table<string, number>
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterVoid)
+---@field waterVoid boolean?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterPlane)
+---@field waterPlane boolean?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterTexture)
+---@field waterTexture string?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterRepeatX)
+---@field waterRepeatX number?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterRepeatY)
+---@field waterRepeatY number?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterFoamTexture)
+---@field waterFoamTexture string?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterNormalTexture)
+---@field waterNormalTexture string?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterCausticTextures)
+---@field waterCausticTextures string[]?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterAbsorb)
+---@field waterAbsorb color?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterBaseColor)
+---@field waterBaseColor color?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterMinColor)
+---@field waterMinColor color?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterSurfaceColor)
+---@field waterSurfaceColor color?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterSurfaceAlpha)
+---@field waterSurfaceAlpha number?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterSpecularColor)
+---@field waterSpecularColor color?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterSpecularFactor)
+---@field waterSpecularFactor number?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterPlaneColor)
+---@field waterPlaneColor color?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterFresnelMin)
+---@field waterFresnelMin number?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterFresnelMax)
+---@field waterFresnelMax number?
+---Deprecated by 104.0 - No longer constant as are now runtime mutable (Use gl.GetWaterRendering(name) instead).
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.waterFresnelPower)
+---@field waterFresnelPower number?
+---Deprecated by version 101.0 (Use gl.GetAtmosphere("fogColor") instead)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.fogColor)
+---@field fogColor color?
+---Deprecated by version 101.0 (Use gl.GetAtmosphere("ambient") instead)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.groundAmbientColor)
+---@field groundAmbientColor color?
+---Deprecated by version 101.0 (Use gl.GetAtmosphere("specular") instead)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.groundSpecularColor)
+---@field groundSpecularColor color?
+---Deprecated by version 101.0 (Use gl.GetAtmosphere("diffuse") instead)
+---
+---[View documentation](https://springrts.com/wiki/Lua_ConstGame#Game.groundSunColor)
+---@field groundSunColor color?

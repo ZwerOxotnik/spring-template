@@ -1,0 +1,175 @@
+---@meta
+---@diagnostic disable
+
+
+---These functions are ONLY available if the graphics adapter supports GLSL.
+---
+---Please test in your scripts if one of them exists before you use them. In headless mode, the gl. callouts are nil.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api)
+---@class GLSL_Api
+---ONLY available if the graphics adapter supports GLSL.
+---Creates a shader:
+---### Example
+---```lua
+---CreateShader({[ vertex   = "glsl code" ,]
+---   [ tcs      = "glsl code" ,]
+---   [ tes      = "glsl code" ,]
+---   [ geometry = "glsl code" ,]
+---   [ fragment = "glsl code" ,]
+---   [ uniform       = { uniformName = number value, ...} ,] (specify a Lua array as an argument to uniformName to initialize GLSL arrays)
+---   [ uniformInt    = { uniformName = number value, ...} ,] (specify a Lua array as an argument to uniformName to initialize GLSL arrays)
+---   [ uniformFloat  = { uniformName = number value, ...} ,] (specify a Lua array as an argument to uniformName to initialize GLSL arrays)
+---   [ uniformMatrix = { uniformName = number value, ...} ,]
+---   [ geoInputType = number inType,]
+---   [ geoOutputType = number outType,]
+---   [ geoOutputVerts = number maxVerts,]
+---   [ definitions = "string of shader #defines", ]
+--- })
+---```
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#CreateShader)
+---@nodiscard
+---@field CreateShader fun(shaderParams: CreateShader.shaderParams): shaderID
+---ONLY available if the graphics adapter supports GLSL.
+---Deletes a shader identified by shaderID
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#DeleteShader)
+---@field DeleteShader fun(shaderID: shaderID)
+---ONLY available if the graphics adapter supports GLSL.
+---Binds a shader program identified by shaderID, and calls the Lua func with the specified arguments.\
+---Can be used in NON-drawing events (to update uniforms etc.)!
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#ActiveShader)
+---@param shaderID shaderID
+---@param func function
+---@param ... any
+---@field ActiveShader fun(shaderID: shaderID, func: function, ...: any)
+---ONLY available if the graphics adapter supports GLSL.
+---Returns the shader compilation error log.\
+---This is empty if the shader linking failed, in that case, check your in/out blocks and ensure they match.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#GetShaderLog)
+---@nodiscard
+---@field GetShaderLog fun(): string
+---ONLY available if the graphics adapter supports GLSL.
+---Sets the Geometry shader parameters for shaderID.\
+---Needed by geometry shader programs (check the opengl GL_ARB_geometry_shader4 extension for glProgramParameteri)\
+---Was called SetShaderParameter before 104.0.1-596 (maintenance)
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#SetGeometryShaderParameter)
+---@param shaderID shaderID
+---@param param number
+---@param number number
+---@field SetGeometryShaderParameter fun(shaderID: shaderID, param: number, number: number)
+---ONLY available if the graphics adapter supports GLSL.
+---Sets the tesselation shader parameters for shaderID.\
+---Needed by tesselation shader programs (check the opengl GL_ARB_tessellation_shader extension for glProgramParameteri)\
+---Introduced in 104.0.1-596 (maintenance)
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#SetTesselationShaderParameter)
+---@param param number
+---@param number number
+---@field SetTesselationShaderParameter fun(param: number, number: number)
+---ONLY available if the graphics adapter supports GLSL.
+---Query the active (actually used) uniforms of a shader and identify their names, types (float, int, uint) and sizes (float, vec4, ...).
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#GetActiveUniforms)
+---@nodiscard
+---@field GetActiveUniforms fun(shaderID: shaderID): ActiveUniform[]
+---ONLY available if the graphics adapter supports GLSL.
+---Returns the locationID of a shaders uniform.\
+---Needed for changing uniform values with gl.Uniform.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#GetUniformLocation)
+---@param shaderID shaderID
+---@param name string
+---@return locationID
+---@nodiscard
+---@field GetUniformLocation fun(shaderID: shaderID, name: string): locationID
+---ONLY available if the graphics adapter supports GLSL.
+---Sets the uniform float value at the locationID for the currently active shader.\
+---Shader must be activated before setting uniforms.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#Uniform)
+---@field Uniform fun(locationID: locationID, f1: number, f2: number?, f3: number?, f4: number?)
+---ONLY available if the graphics adapter supports GLSL.
+---Sets the uniform int value at the locationID for the currently active shader.\
+---Shader must be activated before setting uniforms.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#UniformInt)
+---@field UniformInt fun(locationID: locationID, int1: number, int2: number?, int3: number?, int4: number?)
+---ONLY available if the graphics adapter supports GLSL.
+---Sets the an array of uniform values at the locationID for the currently active shader.\
+---Shader must be activated before setting uniforms.\
+---In 104.0 the maximum length of the uniforms table increased from 32 entries to 1024.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#UniformArray)
+---@field UniformArray fun(locationID: locationID, type: UniformType, uniforms: table[])
+---ONLY available if the graphics adapter supports GLSL.
+---WARNING: probably, wrong information about parameters\
+---Sets the a uniform mat4 locationID for the currently active shader.\
+---Shader must be activated before setting uniforms.\
+---Can set one one common matrix like shadow, or by passing 16 additional numbers for the matrix.
+---
+---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#UniformMatrix)
+---@param uniforms table
+---@field UniformMatrix fun(locationID: locationID, m1: "shadows" | "camera" | "caminv" | "camprj")
+---@field UniformMatrix fun(locationID: locationID, m1: number, m2: number, m3: number, m4: number, m5: number, m6: number, m7: number, m8: number, m9: number, m10: number, m11: number, m12: number, m13: number, m14: number, m15: number, m16: number)
+
+
+---WARNING: probably, has wrong information about some fields
+---
+---[View documentation](https://springrts.com/wiki/Lua_GLSL_Api#CreateShader)
+---@class CreateShader.shaderParams
+---The "Vertex" or vertex-shader is your GLSL-Code as string, its written in a C-Dialect.\
+---This shader is busy deforming the geometry of a unit but it can not create new polygons.\
+---Use it for waves, wobbling surfaces etc.
+---@field vertex string
+---The "TCS" or Tesselation Control Shader controls how much tessellation a particular patch gets;\
+---it also defines the size of a patch, thus allowing it to augment data.\
+---It can also filter vertex data taken from the vertex shader.\
+---The main purpose of the TCS is to feed the tessellation levels to the Tessellation primitive generator stage,\
+---as well as to feed patch data (as its output values) to the Tessellation Evaluation Shader stage.\
+---TCS shader can be used with spring version >= 104.0.1-596 (maintenance), it's also available in develop branch of spring.
+---@field tcs string?
+---The "TES" or Tesselation Evaluation Shader takes the abstract patch generated by the tessellation primitive generation stage, as well as the actual vertex data for the entire patch, and generates a particular vertex from it.\
+---Each TES invocation generates a single vertex.\
+---It can also take per-patch data provided by the Tessellation Control Shader.\
+---TES shader can be used with spring version >= 104.0.1-596 (maintenance), it's also available in develop branch of spring.
+---@field tes string?
+---The "Geometry" or Geometry-shader can create new vertices and vertice-stripes from points.
+---@field geometry string?
+---The "Fragment" or Fragment-shader (sometimes called pixel-Shader) is post processing the allready rendered picture (for example drawing stars on the sky)- remember textures are not always 2 dimensional pictures.\
+---They can contain information about the depth, or the third value marks areas and the strength at which these are processed.
+---@field fragment string
+---The Uniforms are the values, you send along with the shader-program.
+---### Example
+---```c
+---uniform float frame;
+---```
+---From 101.0 onwards, the engine will automatically fill in an appropriately named uniform for team colour if it is declared;
+---### Example
+---```c
+---uniform vec4 teamColor;
+---```
+---@field uniform table<string, any>? -- TODO: improve
+---@field uniformInt table?
+---@field uniformFloat table?
+---@field uniformMatrix table?
+---@field geoInputType number?
+---@field geoOutputType number?
+---@field geoOutputVerts number?
+---@field definitions string[]?
+
+
+---@class ActiveUniform
+---@field name string
+---@field type string
+---@field length number
+---@field size number
+
+
+---@alias UniformType
+---| 1 # int
+---| 2 # float
+---| 3 # float matrix

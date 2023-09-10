@@ -1,0 +1,148 @@
+---@meta
+---@diagnostic disable
+
+
+---[View documents](https://springrts.com/wiki/Lua_System)
+---@class System
+---@field NO_ACCESS_TEAM  number
+---@field ALL_ACCESS_TEAM number
+---For LuaGadgets only (Synced)
+---Number containing the cobscale factor, which is applied to transform the variables assigned via unit cob animation scripts for use inside the engine (default: 65536).
+---
+---[View documents](https://springrts.com/wiki/Lua_System#COBSCALE)
+---@field COBSCALE number|nil
+---[View documents](https://springrts.com/wiki/Lua_System#Kill)
+---@field Kill fun()
+---[View documents](https://springrts.com/wiki/Lua_System#GetName)
+---@field GetName fun(): luaInstanceName
+---[View documents](https://springrts.com/wiki/Lua_System#GetSynced)
+---@field GetSynced fun(): is_synced: boolean
+---[View documents](https://springrts.com/wiki/Lua_System#GetFullCtrl)
+---@field GetFullCtrl fun(): has_fullctrl: boolean
+---[View documents](https://springrts.com/wiki/Lua_System#GetFullRead)
+---@field GetFullRead fun(): has_fullread: boolean
+---[View documents](https://springrts.com/wiki/Lua_System#GetCtrlTeam)
+---@field GetCtrlTeam fun(): ctrl_teamID: number
+---[View documents](https://springrts.com/wiki/Lua_System#GetReadTeam)
+---@field GetReadTeam fun(): read_teamID: number
+---[View documents](https://springrts.com/wiki/Lua_System#GetReadAllyTeam)
+---@field GetReadAllyTeam fun(): read_allyTeamID: number
+---Defines which teamunits can be selected via Spring.SelectUnitMap/Spring.SelectUnitArray.
+---
+---[View documents](https://springrts.com/wiki/Lua_System#GetSelectTeam)
+---@field GetSelectTeam fun(): select_teamID: number
+---Returns nil if not in dev-mode
+---
+---[View documents](https://springrts.com/wiki/Lua_System#GetGlobal)
+---@field GetGlobal fun(): globalEnv: table|nil
+---Returns nil if not in dev-mode
+---
+---[View documents](https://springrts.com/wiki/Lua_System#GetRegistry)
+---@field GetRegistry fun(): registryEnv: table|nil
+---[View documents](https://springrts.com/wiki/Lua_System#GetRegistry)
+---@field GetCallInList fun(): known_callins: table<string, known_callin>|nil
+---WARNING: probably wrong information about types of parameters!
+---
+---[View documents](https://springrts.com/wiki/Lua_System#IsEngineMinVersion)
+---@field IsEngineMinVersion fun(major: string): isMinVersion: boolean?
+---@field IsEngineMinVersion fun(major: string, minor: string): isMinVersion: boolean?
+---@field IsEngineMinVersion fun(major: string, minor: string, commits: string[]): isMinVersion: boolean?
+---For LuaUI only
+---
+---[View documents](https://springrts.com/wiki/Lua_System#SetShockFrontFactors)
+---@field SetShockFrontFactors fun(minArea: number, minPower: number, distAdj: number)
+---For LuaUI only
+---
+---[View documents](https://springrts.com/wiki/Lua_System#UpdateCallIn)
+---@field UpdateCallIn fun(callin_name: string)
+---For LuaGadgets only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#AddActionFallback)
+---@field AddActionFallback fun(command: string, help: string): nil|boolean
+---For LuaGadgets only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#RemoveActionFallback)
+---@field RemoveActionFallback fun(command: string): nil|boolean
+---For LuaGadgets only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#UpdateCallIn)
+---@field UpdateCallIn fun(callin_name: string)
+---For LuaGadgets only (Synced)
+---Enables the `UnitFeatureCollision` callin for a specific FeatureDef.
+---
+---[View documents](https://springrts.com/wiki/Lua_System#SetWatchFeature)
+---@field SetWatchFeature fun(featureDefID: number, enable: boolean)
+---For LuaGadgets only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#GetWatchFeature)
+---@field GetWatchFeature fun(featureDefID: number): nil|boolean
+---For LuaGadgets only (Synced)
+---Enables the `UnitUnitCollision`, `UnitFeatureCollision` and `UnitMoveFailed` callins for a specific UnitDef.
+---
+---[View documents](https://springrts.com/wiki/Lua_System#SetWatchUnit)
+---@field SetWatchUnit fun(unitDefID: unitDefID, enable: boolean)
+---For LuaGadgets only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#GetWatchUnit)
+---@field GetWatchUnit fun(unitDefID: unitDefID): nil|boolean
+---For LuaGadgets only (Synced)
+---Enables the `Explosion` and (as of 0.83+) `ProjectileCreated` and `ProjectileDestroyed` callins for a specific WeaponDef.
+---
+---[View documents](https://springrts.com/wiki/Lua_System#SetWatchWeapon)
+---@field SetWatchWeapon fun(weaponDefID: weaponDefID, enable: boolean)
+---For LuaGadgets only (Synced)
+---Enables the `Explosion` and (as of 0.83+) `ProjectileCreated` and `ProjectileDestroyed` callins for a specific WeaponDef.
+---
+---[View documents](https://springrts.com/wiki/Lua_System#GetWatchWeapon)
+---@field GetWatchWeapon fun(weaponDefID: weaponDefID): enabled: boolean
+---For LuaGadgets only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#SendToUnsynced)
+---@field SendToUnsynced fun(...: boolean|number|string|nil)
+---For LuaGadgets only (Unsynced/Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#CallAsTeam)
+---@field CallAsTeam fun(teamID: teamID, f:function, ...: any)
+---@field CallAsTeam fun(access: CallAsTeam.access, f:function, ...: any)
+---For LuaGadgets only (Unsynced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#UpdateCallIn)
+---@field UpdateCallIn fun(callin_name: string)
+---For LuaRules only (Synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_System#PermitHelperAIs)
+---@field PermitHelperAIs fun(permit: boolean)
+
+
+---WARNING: probably wrong information about fields
+---LOS checking depends on the `selected` team, this functions allows to select another one.
+---@class CallAsTeam.access
+---@field ctrl teamID? # Limits Spring.GiveOrderXYZ
+---@field read teamID? # Limits reading of unit params, e.g. Spring.GetUnitLosState
+---@field select teamID? # Limits Spring.SelectUnitXYZ
+
+
+---@class known_callin
+---@field unsynced boolean
+---`controller` is true for all CallIns which's return values are used by the engine for synced code,
+---e.g. "AllowUnitCreation" is a controller
+---@field controller boolean
+
+
+---@alias luaInstanceName
+---The main environment for toggleable UI elements and controls ("widgets").
+---| "LuaUI"
+---The main environment for synced game-controlling mechanics ("gadgets").
+---| "LuaRules"
+---As LuaRules but for maps.
+---| "LuaGaia"
+---Introduced in 104.0, a stripped down environment that starts before the game is loaded and persists through reload.
+---| "LuaMenu"
+---Introduced in 95.0, to allow visual customisation of the loading process.
+---| "LuaIntro"
+---Minimal environment used to parse and load definition files.
+---| "LuaParser"
+
+
+---@type System
+Script = Script
