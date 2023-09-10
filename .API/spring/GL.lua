@@ -19,25 +19,25 @@
 ---Drawing primitive\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@field PATCHES glDrawingPrimitive
----@field ZERO                glBlendingFactorDest|glBlendingFactorSrc
----@field ONE                 glBlendingFactorDest|glBlendingFactorSrc
----@field SRC_COLOR           glBlendingFactorDest|glBlendingFactorSrc
----@field ONE_MINUS_SRC_COLOR glBlendingFactorDest|glBlendingFactorSrc
----@field SRC_ALPHA           glBlendingFactorDest|glBlendingFactorSrc
----@field ONE_MINUS_SRC_ALPHA glBlendingFactorDest|glBlendingFactorSrc
----@field DST_ALPHA           glBlendingFactorDest|glBlendingFactorSrc
----@field ONE_MINUS_DST_ALPHA glBlendingFactorDest|glBlendingFactorSrc
+---@field ZERO                glBlendingFactor
+---@field ONE                 glBlendingFactor
+---@field SRC_COLOR           glBlendingFactor
+---@field ONE_MINUS_SRC_COLOR glBlendingFactor
+---@field SRC_ALPHA           glBlendingFactor
+---@field ONE_MINUS_SRC_ALPHA glBlendingFactor
+---@field DST_ALPHA           glBlendingFactor
+---@field ONE_MINUS_DST_ALPHA glBlendingFactor
 ---@field DST_COLOR           glBlendingFactorSrc
 ---@field ONE_MINUS_DST_COLOR glBlendingFactorSrc
 ---@field SRC_ALPHA_SATURATE  glBlendingFactorSrc
----@field NEVER    glAlphaFunction|glDepthFunction
----@field LESS     glAlphaFunction|glDepthFunction
----@field EQUAL    glAlphaFunction|glDepthFunction
----@field LEQUAL   glAlphaFunction|glDepthFunction
----@field GREATER  glAlphaFunction|glDepthFunction
----@field NOTEQUAL glAlphaFunction|glDepthFunction
----@field GEQUAL   glAlphaFunction|glDepthFunction
----@field ALWAYS   glAlphaFunction|glDepthFunction
+---@field NEVER    glFunction
+---@field LESS     glFunction
+---@field EQUAL    glFunction
+---@field LEQUAL   glFunction
+---@field GREATER  glFunction
+---@field NOTEQUAL glFunction
+---@field GEQUAL   glFunction
+---@field ALWAYS   glFunction
 ---@field CLEAR glLogicOp
 ---@field AND glLogicOp
 ---@field AND_REVERSE glLogicOp
@@ -112,10 +112,10 @@
 ---@field TEXTURE_BIT         glPushAttrib
 ---@field SCISSOR_BIT         glPushAttrib
 ---@field ALL_ATTRIB_bit      glPushAttrib
----@field DEPTH_BUFFER_BIT   glClearBit|glPushAttrib
----@field ACCUM_BUFFER_BIT   glClearBit|glPushAttrib
----@field STENCIL_BUFFER_BIT glClearBit|glPushAttrib
----@field COLOR_BUFFER_BIT   glClearBit|glPushAttrib
+---@field DEPTH_BUFFER_BIT   glBufferBit
+---@field ACCUM_BUFFER_BIT   glBufferBit
+---@field STENCIL_BUFFER_BIT glBufferBit
+---@field COLOR_BUFFER_BIT   glBufferBit
 ---@field FOG_HINT                    glHint_target
 ---@field LINE_SMOOTH_HINT            glHint_target
 ---@field POINT_SMOOTH_HINT           glHint_target
@@ -291,3 +291,13 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 -- FBO Attachment
 ---Tesselation control shader parameter\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glTesselationControlShaderParameter:GLtype
+
+
+---@class glBlendingFactor: glBlendingFactorDest
+---@class glBlendingFactor: glBlendingFactorSrc
+
+---@class glBufferBit: glClearBit
+---@class glBufferBit: glPushAttrib
+
+---@class glFunction: glAlphaFunction
+---@class glFunction: glDepthFunction
