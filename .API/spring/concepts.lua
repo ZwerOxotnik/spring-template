@@ -23,12 +23,6 @@
 ---@alias color color.0|color.1|color.2
 
 
----@class color.2
----@field r number
----@field g number
----@field b number
-
-
 ---eg {0.0, 0.0, 0.0}
 ---@class rgb
 ---@field [1] float r ranged from 0.0 to 1.0
