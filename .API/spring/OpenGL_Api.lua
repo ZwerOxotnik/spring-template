@@ -219,16 +219,29 @@
 ---@field FogCoord fun(value: number)
 
 
+---@class Shape.vertex
+---@field [1] number  x
+---@field [2] number  y
+---@field [3] number? z
+
+---@class Shape.normal
+---@field [1] number  x
+---@field [2] number  y
+
+---@class Shape.texcoord
+---@field [1] number  x
+---@field [2] number  y
+
 ---@class Shape.element.0
----@field v XYZ
----@field n XYZ?
----@field t XY?
+---@field v Shape.vertex
+---@field n Shape.normal?
+---@field t Shape.texcoord?
 ---@field c color.2?
 
 ---@class Shape.element.1
----@field vertex XYZ
----@field normal XYZ?
----@field texcoord XY?
+---@field vertex Shape.vertex
+---@field normal Shape.normal?
+---@field texcoord Shape.texcoord?
 ---@field color color.2?
 
 ---@alias Shape.element Shape.element.0|Shape.element.1
