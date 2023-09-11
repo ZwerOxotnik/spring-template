@@ -43,24 +43,24 @@
 ---
 ---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO)
 ---@class fbo
----@field depth   texture?
----@field stencil texture?
----@field color0  texture
----@field color1  texture?
----@field color2  texture?
----@field color3  texture?
----@field color4  texture?
----@field color5  texture?
----@field color6  texture?
----@field color7  texture?
----@field color8  texture?
----@field color9  texture?
----@field color10 texture?
----@field color11 texture?
----@field color12 texture?
----@field color13 texture?
----@field color14 texture?
----@field color15 texture?
+---@field depth   attachment?
+---@field stencil attachment?
+---@field color0  attachment
+---@field color1  attachment?
+---@field color2  attachment?
+---@field color3  attachment?
+---@field color4  attachment?
+---@field color5  attachment?
+---@field color6  attachment?
+---@field color7  attachment?
+---@field color8  attachment?
+---@field color9  attachment?
+---@field color10 attachment?
+---@field color11 attachment?
+---@field color12 attachment?
+---@field color13 attachment?
+---@field color14 attachment?
+---@field color15 attachment?
 ---@field drawbuffers FBOattachment[]
 
 
@@ -70,3 +70,20 @@
 ---@class _fbo: userdata
 ---@class _fbo: fbo
 ---@field readbuffer FBOattachment
+
+
+---@alias attachment texture|rbo|table|nil
+
+
+---WARNING: maybe wrong information
+---
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO)
+---@class rbo: userdata
+---@field target  number
+---@field format  FBOformat
+---@field xsize   number
+---@field ysize   number
+---@field valid   boolean
+---(Added in 104.0.1-1015-g8e36ef2 maintenance)
+---will return globalRendering->msaaLevel for multisampled RBO or 0 otherwise
+---@field samples number
