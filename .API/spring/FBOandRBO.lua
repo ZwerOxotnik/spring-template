@@ -72,6 +72,9 @@
 ---@field readbuffer FBOattachment
 
 
+---attachment ::= luaTex or RBO or nil or { luaTex or RBO [, num target [, num level ]] }\
+---WARNING: maybe wrong information
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO)
 ---@alias attachment texture|rbo|table|nil
 
 
