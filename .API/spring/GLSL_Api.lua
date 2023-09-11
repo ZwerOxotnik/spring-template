@@ -40,9 +40,6 @@
 ---Can be used in NON-drawing events (to update uniforms etc.)!
 ---
 ---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#ActiveShader)
----@param shaderID shaderID
----@param func function
----@param ... any
 ---@field ActiveShader fun(shaderID: shaderID, func: function, ...: any)
 ---ONLY available if the graphics adapter supports GLSL.
 ---Returns the shader compilation error log.\
@@ -57,9 +54,6 @@
 ---Was called SetShaderParameter before 104.0.1-596 (maintenance)
 ---
 ---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#SetGeometryShaderParameter)
----@param shaderID shaderID
----@param param number
----@param number number
 ---@field SetGeometryShaderParameter fun(shaderID: shaderID, param: number, number: number)
 ---ONLY available if the graphics adapter supports GLSL.
 ---Sets the tesselation shader parameters for shaderID.\
@@ -67,8 +61,6 @@
 ---Introduced in 104.0.1-596 (maintenance)
 ---
 ---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#SetTesselationShaderParameter)
----@param param number
----@param number number
 ---@field SetTesselationShaderParameter fun(param: number, number: number)
 ---ONLY available if the graphics adapter supports GLSL.
 ---Query the active (actually used) uniforms of a shader and identify their names, types (float, int, uint) and sizes (float, vec4, ...).
@@ -81,10 +73,6 @@
 ---Needed for changing uniform values with gl.Uniform.
 ---
 ---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#GetUniformLocation)
----@param shaderID shaderID
----@param name string
----@return locationID
----@nodiscard
 ---@field GetUniformLocation fun(shaderID: shaderID, name: string): locationID
 ---ONLY available if the graphics adapter supports GLSL.
 ---Sets the uniform float value at the locationID for the currently active shader.\
@@ -104,7 +92,7 @@
 ---In 104.0 the maximum length of the uniforms table increased from 32 entries to 1024.
 ---
 ---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#UniformArray)
----@field UniformArray fun(locationID: locationID, type: UniformType, uniforms: table[])
+---@field UniformArray fun(locationID: locationID, type: UniformType, uniforms: UniformArray.uniform[])
 ---ONLY available if the graphics adapter supports GLSL.
 ---WARNING: probably, wrong information about parameters\
 ---Sets the a uniform mat4 locationID for the currently active shader.\
@@ -112,7 +100,6 @@
 ---Can set one one common matrix like shadow, or by passing 16 additional numbers for the matrix.
 ---
 ---[View documents](https://springrts.com/wiki/Lua_GLSL_Api#UniformMatrix)
----@param uniforms table
 ---@field UniformMatrix fun(locationID: locationID, m1: "shadows" | "camera" | "caminv" | "camprj")
 ---@field UniformMatrix fun(locationID: locationID, m1: number, m2: number, m3: number, m4: number, m5: number, m6: number, m7: number, m8: number, m9: number, m10: number, m11: number, m12: number, m13: number, m14: number, m15: number, m16: number)
 
@@ -168,6 +155,7 @@
 ---@field length number
 ---@field size number
 
+---@class UniformArray.uniform: table
 
 ---@alias UniformType
 ---| 1 # int
