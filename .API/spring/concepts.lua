@@ -57,6 +57,8 @@
 ---@alias shaderID number
 ---@alias locationID number
 ---@alias weaponDefID number
+---@alias projectileID number
+---@alias featureID number
 ---@alias unitDefID number
 ---@alias teamID number
 ---@alias font userdata
