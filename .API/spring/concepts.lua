@@ -61,4 +61,5 @@
 ---@class featureID: number
 ---@class unitDefID: number
 ---@class teamID: number
+---@class texture: string
 ---@class font: userdata

@@ -151,51 +151,58 @@
 GL = GL
 
 
----@type glTextureEnvironment
-GL_TEXTURE_FILTER_CONTROL = GL_TEXTURE_FILTER_CONTROL
----@type glTextureEnvironment
-GL_TEXTURE_LOD_BIAS = GL_TEXTURE_LOD_BIAS
-GL_RGBA16F_ARB = 0x881A -- Texture Format
-GL_RGBA32F_ARB = 0x8814 -- Texture Format
-GL_DEPTH_COMPONENT   = 0x1902 -- Texture Format
-GL_DEPTH_COMPONENT16 = 0x81A5 -- Texture Format
-GL_DEPTH_COMPONENT24 = 0x81A6 -- Texture Format
-GL_DEPTH_COMPONENT32 = 0x81A7 -- Texture Format
-GL_RGB             = 0x1907 -- RBO Format
-GL_RGBA            = 0x1908 -- RBO Format
-GL_DEPTH_COMPONENT = 0x1902 -- RBO Format
-GL_STENCIL_INDEX   = 0x1901 -- RBO Format
-GL_FRAMEBUFFER_EXT      = 0x8D40 -- FBO Target
-GL_READ_FRAMEBUFFER_EXT = 0x8CA8 -- FBO Target
-GL_DRAW_FRAMEBUFFER_EXT = 0x8CA9 -- FBO Target
-GL_FRAMEBUFFER_COMPLETE_EXT                        = 0x8CD5 -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT           = 0x8CD6 -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT   = 0x8CD7 -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_DUPLICATE_ATTACHMENT_EXT = 0x8CD8 -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT           = 0x8CD9 -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT              = 0x8CDA -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT          = 0x8CDB -- FBO status
-GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT          = 0x8CDC -- FBO status
-GL_FRAMEBUFFER_UNSUPPORTED_EXT                     = 0x8CDD -- FBO status
-GL_FRAMEBUFFER_STATUS_ERROR_EXT                    = 0x8CDE -- FBO status
-GL_COLOR_ATTACHMENT0_EXT  = 0x8CE0 -- FBO Attachment
-GL_COLOR_ATTACHMENT1_EXT  = 0x8CE1 -- FBO Attachment
-GL_COLOR_ATTACHMENT2_EXT  = 0x8CE2 -- FBO Attachment
-GL_COLOR_ATTACHMENT3_EXT  = 0x8CE3 -- FBO Attachment
-GL_COLOR_ATTACHMENT4_EXT  = 0x8CE4 -- FBO Attachment
-GL_COLOR_ATTACHMENT5_EXT  = 0x8CE5 -- FBO Attachment
-GL_COLOR_ATTACHMENT6_EXT  = 0x8CE6 -- FBO Attachment
-GL_COLOR_ATTACHMENT7_EXT  = 0x8CE7 -- FBO Attachment
-GL_COLOR_ATTACHMENT8_EXT  = 0x8CE8 -- FBO Attachment
-GL_COLOR_ATTACHMENT9_EXT  = 0x8CE9 -- FBO Attachment
-GL_COLOR_ATTACHMENT10_EXT = 0x8CEA -- FBO Attachment
-GL_COLOR_ATTACHMENT11_EXT = 0x8CEB -- FBO Attachment
-GL_COLOR_ATTACHMENT12_EXT = 0x8CEC -- FBO Attachment
-GL_COLOR_ATTACHMENT13_EXT = 0x8CED -- FBO Attachment
-GL_COLOR_ATTACHMENT14_EXT = 0x8CEE -- FBO Attachment
-GL_COLOR_ATTACHMENT15_EXT = 0x8CEF -- FBO Attachment
-GL_DEPTH_ATTACHMENT_EXT   = 0x8D00 -- FBO Attachment
-GL_STENCIL_ATTACHMENT_EXT = 0x8D20 -- FBO Attachment
+GL_TEXTURE_FILTER_CONTROL = GL_TEXTURE_FILTER_CONTROL --[[@as glTextureEnvironment]]
+GL_TEXTURE_LOD_BIAS = GL_TEXTURE_LOD_BIAS             --[[@as glTextureEnvironment]]
+
+
+GL_RGBA16F_ARB = 0x881A       --[[@as GLtextureFormat]]
+GL_RGBA32F_ARB = 0x8814       --[[@as GLtextureFormat]]
+GL_DEPTH_COMPONENT   = 0x1902 --[[@as GLtextureFormat]]
+GL_DEPTH_COMPONENT16 = 0x81A5 --[[@as GLtextureFormat]]
+GL_DEPTH_COMPONENT24 = 0x81A6 --[[@as GLtextureFormat]]
+GL_DEPTH_COMPONENT32 = 0x81A7 --[[@as GLtextureFormat]]
+GL_RGB             = 0x1907 --[[@as FBOformat]]
+GL_RGBA            = 0x1908 --[[@as FBOformat]]
+GL_DEPTH_COMPONENT = 0x1902 --[[@as FBOformat]]
+GL_STENCIL_INDEX   = 0x1901 --[[@as FBOformat]]
+GL_FRAMEBUFFER_EXT      = 0x8D40 --[[@as FBOtarget]]
+GL_READ_FRAMEBUFFER_EXT = 0x8CA8 --[[@as FBOtarget]]
+GL_DRAW_FRAMEBUFFER_EXT = 0x8CA9 --[[@as FBOtarget]]
+GL_FRAMEBUFFER_COMPLETE_EXT                        = 0x8CD5 --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT           = 0x8CD6 --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT   = 0x8CD7 --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_DUPLICATE_ATTACHMENT_EXT = 0x8CD8 --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT           = 0x8CD9 --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_FORMATS_EXT              = 0x8CDA --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT          = 0x8CDB --[[@as FBOstatus]]
+GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT          = 0x8CDC --[[@as FBOstatus]]
+GL_FRAMEBUFFER_UNSUPPORTED_EXT                     = 0x8CDD --[[@as FBOstatus]]
+GL_FRAMEBUFFER_STATUS_ERROR_EXT                    = 0x8CDE --[[@as FBOstatus]]
+GL_COLOR_ATTACHMENT0_EXT  = 0x8CE0 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT1_EXT  = 0x8CE1 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT2_EXT  = 0x8CE2 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT3_EXT  = 0x8CE3 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT4_EXT  = 0x8CE4 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT5_EXT  = 0x8CE5 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT6_EXT  = 0x8CE6 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT7_EXT  = 0x8CE7 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT8_EXT  = 0x8CE8 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT9_EXT  = 0x8CE9 --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT10_EXT = 0x8CEA --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT11_EXT = 0x8CEB --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT12_EXT = 0x8CEC --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT13_EXT = 0x8CED --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT14_EXT = 0x8CEE --[[@as FBOattachment]]
+GL_COLOR_ATTACHMENT15_EXT = 0x8CEF --[[@as FBOattachment]]
+GL_DEPTH_ATTACHMENT_EXT   = 0x8D00 --[[@as FBOattachment]]
+GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
+
+
+---@class FBOattachment: GLtype
+---@class FBOstatus: GLtype
+---@class FBOtarget: GLtype
+---@class FBOformat: GLtype
+---@class GLtextureFormat: GLtype
 
 
 ---[View documents](https://springrts.com/wiki/Lua_ConstGL)
