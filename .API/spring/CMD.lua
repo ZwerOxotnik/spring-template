@@ -4,27 +4,156 @@
 
 ---[View documents](https://springrts.com/wiki/Lua_CMDs)
 ---@class CMD
----@field FIRESTATE_NONE -1|CMDtype
----@field MOVESTATE_NONE -1|CMDtype
----@field OPT_ALT      CMDoption
----@field OPT_SHIFT    CMDoption
----@field OPT_RIGHT    CMDoption
----@field OPT_INTERNAL CMDoption
----@field OPT_META   4|CMDoption
+---@field FIRESTATE_NONE -1|CMDTYPE
+---@field MOVESTATE_NONE -1|CMDTYPE
+---@field STOP               0|CMDTYPE.ICON
+---@field MOVESTATE_HOLDPOS  0|CMDTYPE
+---@field FIRESTATE_HOLDFIRE 0|CMDTYPE
+---[View documents](https://springrts.com/wiki/Lua_CMDs)
+---@field INSERT               1|CMDTYPE
+---@field MOVESTATE_MANEUVER   1|CMDTYPE
+---@field FIRESTATE_RETURNFIRE 1|CMDTYPE
+---[View documents](https://springrts.com/wiki/Lua_CMDs)
+---@field REMOVE               2|CMDTYPE
+---@field FIRESTATE_FIREATWILL 2|CMDTYPE
+---@field FIRESTATE_FIREATNEUTRAL 3|CMDTYPE
+---@field WAIT 5|CMDTYPE.ICON
+---@field TIMEWAIT 6|CMDTYPE.NUMBER
+---@field DEATHWAIT 7|CMDTYPE.ICON_UNIT_OR_RECTANGLE
+---@field SQUADWAIT 8|CMDTYPE.NUMBER
+---@field GATHERWAIT 9|CMDTYPE.ICON
+---@field MOVE   10|CMDTYPE.ICON_MAP
+---@field PATROL 15|CMDTYPE.ICON_MAP
+---@field FIGHT  16|CMDTYPE.ICON_MAP
+---@field LOOPBACKATTACK 20|CMDTYPE.ICON_MODE
+---@field ATTACK 20|CMDTYPE.ICON_UNIT_OR_MAP
+---@field AREA_ATTACK 21|CMDTYPE.ICON_AREA
+---@field GUARD 25|CMDTYPE.ICON_UNIT
+---@field AISELECT 30|CMDTYPE.COMBO_BOX
+---@field GROUPSELECT 35|CMDTYPE.ICON
+---@field GROUPADD    36|CMDTYPE.ICON
+---@field GROUPCLEAR  37|CMDTYPE.ICON
+---@field REPAIR 40|CMDTYPE.ICON_UNIT_OR_AREA
+---@field FIRE_STATE 45|CMDTYPE.ICON_MODE
+---@field MOVE_STATE 50|CMDTYPE.ICON_MODE
+---@field SETBASE 55|CMDTYPE
+---used in different ways\
+---**A negative number means build command**\
+---The number is -unitDefID of the unittype that this command orders to be built.
+---```
+---This means that build orders have no convenient CMD._____ string.
+---The command id for build orders must always be a "minus" sign appended to an integer value.
+---Spring.GiveOrderToUnit(unitID, -(unitDefID), {x,y,z(,facing)}, {"shift"})
+---alternatively:
+---Spring.GiveOrderToUnit(unitID, -UnitDefNames["unitname"].id, {x,y,z(,facing)}, {"shift"})
+---'facing' is an optional integer parameter that controls unit's facing when placed.
+---The values of (x,y,z) must all be number values (like the number "0"), or the build order will break.
+---```
+---@field INTERNAL 60|CMDTYPE
+---@field SELFD    65|CMDTYPE.ICON
+---@field SET_WANTED_MAX_SPEED 70|CMDTYPE.NUMBER
+---@field LOAD_UNITS 75|CMDTYPE.ICON_UNIT_OR_AREA
+---@field LOAD_ONTO  76|CMDTYPE.ICON_UNIT
+---@field UNLOAD_UNITS 80|CMDTYPE.ICON_UNIT_OR_AREA
+---@field UNLOAD_UNIT  81|CMDTYPE.ICON_UNIT
+---@field ONOFF   85|CMDTYPE.ICON_MODE
+---@field RECLAIM 90|CMDTYPE.ICON_UNIT_FEATURE_OR_AREA
+---@field CLOAK   95|CMDTYPE.ICON_MODE
+---@field STOCKPILE  100|CMDTYPE.ICON
+---@field MANUALFIRE 105|CMDTYPE
+---@field DGUN    105|CMDTYPE.ICON_MAP
+---@field RESTORE 110|CMDTYPE.ICON_AREA
+---@field REPEAT     115|CMDTYPE.ICON_MODE
+---@field TRAJECTORY 120|CMDTYPE.ICON_MODE
+---@field RESURRECT  125|CMDTYPE.ICON_UNIT_FEATURE_OR_AREA
+---@field CAPTURE    130|CMDTYPE.ICON_UNIT_OR_AREA
+---@field AUTOREPAIRLEVEL 135|CMDTYPE.ICON_MODE
+---@field IDLEMODE 145|CMDTYPE.ICON_MODE
+---@field OPT_META     4|CMDoption
+---@field OPT_INTERNAL 8|CMDoption
+---@field OPT_RIGHT   16|CMDoption
+---@field OPT_SHIFT   32|CMDoption
+---@field OPT_ALT    128|CMDoption
 ---@field WAITCODE_TIME   1|CMDwaitcode
 ---@field WAITCODE_DEATH  2|CMDwaitcode
 ---@field WAITCODE_SQUAD  3|CMDwaitcode
 ---@field WAITCODE_GATHER 4|CMDwaitcode
----@field INSERT    1|CMDtype
----@field AREA_ATTACK CMDtype
 
 
----@type CMD|table<string, CMDtype>|table<uint, string>
+---@type CMD|table<CMDTYPE, string>
 CMD = CMD
 
 
 ---[View documents](https://springrts.com/wiki/Lua_ConstGL)
----@class CMDtype:uint
+---@class CMDTYPE:uint
 
----@class CMDoption:CMDtype
----@class CMDwaitcode:CMDtype
+---@class CMDoption:CMDTYPE
+---@class CMDwaitcode:CMDTYPE
+
+
+---@class CommandType: CMDTYPE
+---Expect 0 parameters in return
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON)
+---@class CMDTYPE.ICON: CommandType
+---Expect 1 parameter in return (number selected mode)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_MODE)
+---@class CMDTYPE.ICON_MODE: CommandType
+---Expect 3 parameters in return (mappos)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_MAP)
+---@class CMDTYPE.ICON_MAP: CommandType
+---Expect 4 parameters in return (mappos+radius)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_AREA)
+---@class CMDTYPE.ICON_AREA: CommandType
+---Expect 1 parameters in return (unitid)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_UNIT)
+---@class CMDTYPE.ICON_UNIT: CommandType
+---Expect 1 parameters in return (unitid) or 3 parameters in return (mappos)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_UNIT_OR_MAP)
+---@class CMDTYPE.ICON_UNIT_OR_MAP: CommandType
+---Expect 3 or 6 parameters in return (middle and right side of front if a front was defined)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_FRONT)
+---@class CMDTYPE.ICON_FRONT: CommandType
+---Expect 1 parameter in return (number selected option)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.COMBO_BOX)
+---@class CMDTYPE.COMBO_BOX: CommandType
+---Expect 1 parameter in return (unitid) or 4 parameters in return (mappos+radius)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_UNIT_OR_AREA)
+---@class CMDTYPE.ICON_UNIT_OR_AREA: CommandType
+---Expect 1 parameter in return (unitid or Game.maxUnits+featureid)\
+---    or 4 parameters in return (mappos+radius)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_UNIT_FEATURE_OR_AREA)
+---@class CMDTYPE.ICON_UNIT_FEATURE_OR_AREA: CommandType
+---Expect 3 parameters in return (mappos)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_BUILDING)
+---@class CMDTYPE.ICON_BUILDING: CommandType
+---expect 1 parameter in return (unitid)\
+---    or 3 parameters in return (mappos)\
+---    or 6 parameters in return (startpos+endpos)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.ICON_UNIT_OR_RECTANGLE)
+---@class CMDTYPE.ICON_UNIT_OR_RECTANGLE: CommandType
+---Expect 1 parameter in return (number)
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.NUMBER)
+---@class CMDTYPE.NUMBER: CommandType
+---next command page\
+---Used with CMD_INTERNAL
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.NEXT)
+---@class CMDTYPE.NEXT: CommandType
+---previous command page\
+---Used with CMD_INTERNAL
+---
+---[View documents](https://springrts.com/wiki/Lua_CMDs#CMDTYPE.PREV)
+---@class CMDTYPE.PREV: CommandType
