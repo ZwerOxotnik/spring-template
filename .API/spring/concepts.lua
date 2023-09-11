@@ -54,11 +54,11 @@
 ---@field [4] float
 
 
----@alias shaderID number
----@alias locationID number
----@alias weaponDefID number
----@alias projectileID number
----@alias featureID number
----@alias unitDefID number
----@alias teamID number
----@alias font userdata
+---@class shaderID: number
+---@class locationID: number
+---@class weaponDefID: number
+---@class projectileID: number
+---@class featureID: number
+---@class unitDefID: number
+---@class teamID: number
+---@class font: userdata
