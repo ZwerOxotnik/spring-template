@@ -11,12 +11,14 @@
 
 ---Not available for LuaMenu, LuaIntro, LuaParser
 ---
----https://springrts.com/wiki/Gamedev:WeaponDefs
----Holds information about the unittypes used in the game. read-only.
+---Holds information about the unittypes used in the game. read-only.\
+---[View documents](https://springrts.com/wiki/Lua_WeaponDefs)
 ---@type metatable<string, string|number|table|boolean>[] | WeaponDef[]
 WeaponDefs = WeaponDefs
 
 
 ---Not available for LuaMenu, LuaIntro, LuaParser
+---
+---[View documents](https://springrts.com/wiki/Lua_WeaponDefs)
 ---@type table<string, metatable<string, string|number|table|boolean>|WeaponDef>
 WeaponDefNames = WeaponDefNames
