@@ -65,11 +65,17 @@
 ---@field MODELVIEW  glMatrixMode
 ---@field PROJECTION glMatrixMode
 ---@field TEXTURE    glMatrixMode
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field NEAREST                glTextureFiltering
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field LINEAR                 glTextureFiltering
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field NEAREST_MIPMAP_NEAREST glTextureFiltering
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field LINEAR_MIPMAP_NEAREST  glTextureFiltering
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field NEAREST_MIPMAP_LINEAR  glTextureFiltering
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field LINEAR_MIPMAP_LINEAR   glTextureFiltering
 ---@field REPEAT          glTextureClamping
 ---@field MIRRORED_REPEAT glTextureClamping
@@ -112,9 +118,13 @@
 ---@field TEXTURE_BIT         glPushAttrib
 ---@field SCISSOR_BIT         glPushAttrib
 ---@field ALL_ATTRIB_bit      glPushAttrib
+---Indicates the depth buffer.
 ---@field DEPTH_BUFFER_BIT   glBufferBit
+---Indicates the accumulation buffer.
 ---@field ACCUM_BUFFER_BIT   glBufferBit
+---Indicates the stencil buffer.
 ---@field STENCIL_BUFFER_BIT glBufferBit
+---Indicates the buffers currently enabled for color writing.
 ---@field COLOR_BUFFER_BIT   glBufferBit
 ---@field FOG_HINT                    glHint_target
 ---@field LINE_SMOOTH_HINT            glHint_target

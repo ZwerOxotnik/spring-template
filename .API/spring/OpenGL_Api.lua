@@ -5,7 +5,7 @@
 ---Not available for LuaParser, LuaRules/Gaia (synced).\
 ---Some functions are removed for LuaMenu, LuaIntro.
 ---
----[View documents](https://springrts.com/wiki/Lua_OpenGL_Api)
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api), [LuaOpenGL.cpp](https://github.com/spring/spring/blob/develop/rts/Lua/LuaOpenGL.cpp)
 ---@class OpenGL_Api
 ---Returns X,Y,Z or R,G,B.\
 ---Not available for LuaParser,	LuaRules/Gaia (synced).
@@ -126,14 +126,15 @@
 ---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#ClipPlane)
 ---@field ClipPlane fun(intPlane: ClipPlane.intPlane, enable: boolean)
 ---@field ClipPlane fun(intPlane: ClipPlane.intPlane, A: number, B: number, C: number, D: number)
----Available for LuaRules/Gaia (unsynced), LuaUI only.
+---Available for LuaRules/Gaia (unsynced), LuaUI only.\
+---Clears buffers to preset values.
 ---```
 ---gl.Clear ( GL.DEPTH_BUFFER_BIT [, number cleardepth ] )
 ---gl.Clear ( GL.STENCIL_BUFFER_BIT [, number intClearStencil ] )
 ---gl.Clear ( GL.COLOR_BUFFER_BIT | GL.ACCUM_BUFFER_BIT [, number r, number g, number b, number a ] )
 ---```
 ---
----[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Clear)
+---[View documents](https://springrts.com/wiki/Lua_OpenGL_Api#Clear), [OpenGL reference](https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glClear.xml)
 ---@field Clear fun(bit: glClearBit)
 ---@field Clear fun(bit: glClearBit, cleardepth: number?)
 ---@field Clear fun(bit: glClearBit, intClearStencil: number?)
