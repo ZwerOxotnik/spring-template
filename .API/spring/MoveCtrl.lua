@@ -115,19 +115,21 @@
 ---[View documents](https://springrts.com/wiki/Lua_MoveCtrl#SetMoveDef)
 ---@field SetMoveDef fun(unitID: unitID, moveDefID: moveDefID, moveDefName: string): success: boolean
 ---For LuaRules/Gaia (synced) only.\
----New in 0.81\
+---New in 0.81
 ---
 ---[View documents](https://springrts.com/wiki/Lua_MoveCtrl#SetAirMoveTypeData)
 ---@field SetAirMoveTypeData fun(unitID: unitID, key: string, value: boolean|number)
 ---@field SetAirMoveTypeData fun(unitID: unitID, values: SetAirMoveTypeData.values)
 ---For LuaRules/Gaia (synced) only.\
 ---New in 0.81\
+---[Example](https://springrts.com/wiki/SetMoveTypeDataExample)
 ---
 ---[View documents](https://springrts.com/wiki/Lua_MoveCtrl#SetGroundMoveTypeData)
 ---@field SetGroundMoveTypeData fun(unitID: unitID, key: string, value: boolean|number)
 ---@field SetGroundMoveTypeData fun(unitID: unitID, values: SetGroundMoveTypeData.values)
 ---For LuaRules/Gaia (synced) only.\
 ---New in 0.81\
+---[Example](https://springrts.com/wiki/SetMoveTypeDataExample)
 ---
 ---[View documents](https://springrts.com/wiki/Lua_MoveCtrl#SetGunshipMoveTypeData)
 ---@field SetGunshipMoveTypeData fun(unitID: unitID, key: string, value: boolean|number)
