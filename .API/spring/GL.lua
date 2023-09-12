@@ -213,7 +213,7 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 ---@class GLtype:uint
 
 
----Drawing primitive
+---[opengl/wiki/Primitive](https://www.khronos.org/opengl/wiki/Primitive)
 ---@class glDrawingPrimitive:GLtype
 
 
@@ -229,7 +229,8 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 ---@class glAlphaFunction:GLtype
 
 
----https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml
+---[wiki/GLAPI/glDepthFunc](https://www.khronos.org/opengl/wiki/GLAPI/glDepthFunc)\
+---[OpenGL-Refpages/gl4/html/glDepthFunc](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml)
 ---@class glDepthFunction:GLtype
 
 
@@ -241,11 +242,12 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 ---@class glPushAttrib:GLtype
 
 
----https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLogicOp.xhtml
+---[opengl/wiki/Logical_Operation](https://www.khronos.org/opengl/wiki/Logical_Operation)\
+---[OpenGL-Refpages/gl4/html/glLogicOp](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLogicOp.xhtml)
 ---@class glLogicOp:GLtype
 
 
----https://www.khronos.org/opengl/wiki/Face_Culling
+---[opengl/wiki/Face_Culling](https://www.khronos.org/opengl/wiki/Face_Culling)
 ---@class glCulling:GLtype
 
 
@@ -306,17 +308,21 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 
 
 ---Tesselation control shader parameter\
+---[opengl/wiki/Tessellation_Control_Shader](https://www.khronos.org/opengl/wiki/Tessellation_Control_Shader)\
 ---[OpenGL-Refpages/gl4/html/glPatchParameter](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPatchParameter.xhtml)\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glTesselationControlShaderParameter:GLtype
 
 
----https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml
+---[opengl/wiki/Blending](https://www.khronos.org/opengl/wiki/Blending)\
+---[OpenGL-Refpages/gl4/html/glBlendFunc](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml)
 ---@class glBlendingFactor: glBlendingFactorDest
 ---@class glBlendingFactor: glBlendingFactorSrc
 
+
 ---@class glBufferBit: glClearBit
 ---@class glBufferBit: glPushAttrib
+
 
 ---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glStencilFunc.xhtml
 ---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml
