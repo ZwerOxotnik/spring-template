@@ -11,3 +11,6 @@ Spring.UnitRendering = Spring.UnitRendering
 
 ---@type _Rendering|FeatureRenderingDrawXYZcallin
 Spring.FeatureRendering = Spring.FeatureRendering
+
+---@type MoveCtrl
+Spring.MoveCtrl = Spring.MoveCtrl

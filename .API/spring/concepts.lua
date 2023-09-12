@@ -57,9 +57,10 @@
 ---@class shaderID: number
 ---@class locationID: number
 ---@class weaponDefID: number
+---@class moveDefID: number
+---@class unitDefID: number
 ---@class projectileID: number
 ---@class featureID: number
----@class unitDefID: number
 ---@class moveID: number
 ---@class teamID: number
 ---@class texture: string
