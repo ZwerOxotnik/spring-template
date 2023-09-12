@@ -65,17 +65,11 @@
 ---@field MODELVIEW  glMatrixMode
 ---@field PROJECTION glMatrixMode
 ---@field TEXTURE    glMatrixMode
----https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field NEAREST                glTextureFiltering
----https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field LINEAR                 glTextureFiltering
----https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field NEAREST_MIPMAP_NEAREST glTextureFiltering
----https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field LINEAR_MIPMAP_NEAREST  glTextureFiltering
----https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field NEAREST_MIPMAP_LINEAR  glTextureFiltering
----https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@field LINEAR_MIPMAP_LINEAR   glTextureFiltering
 ---@field REPEAT          glTextureClamping
 ---@field MIRRORED_REPEAT glTextureClamping
@@ -235,86 +229,96 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 ---@class glAlphaFunction:GLtype
 
 
----DepthFunction
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml
 ---@class glDepthFunction:GLtype
 
 
----Clear bit
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glClear.xml
 ---@class glClearBit:GLtype
 
 
----glPushAttrib() bit
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glPushAttrib.xml
 ---@class glPushAttrib:GLtype
 
 
----LogicOp
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glLogicOp.xhtml
 ---@class glLogicOp:GLtype
 
 
----Culling
+---https://www.khronos.org/opengl/wiki/Face_Culling
 ---@class glCulling:GLtype
 
 
----PolygonMode
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPolygonMode.xhtml
 ---@class glPolygonMode:GLtype
 
 
----ShadeModel
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glShadeModel.xml
 ---@class glShadeModel:GLtype
 
 
----MatrixMode
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glMatrixMode.xml
 ---@class glMatrixMode:GLtype
 
 
----Texture Filtering
+---https://registry.khronos.org/OpenGL-Refpages/es2.0/xhtml/glTexParameter.xml
 ---@class glTextureFiltering:GLtype
 
 
----Texture Clamping
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameter.xhtml
 ---@class glTextureClamping:GLtype
 
 
----Texture Environment
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glTexEnv.xml
 ---@class glTextureEnvironment:GLtype
 
 
 ---Texture Generation
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glGetTexGen.xml
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glTexGen.xml
 ---@class glTextureGeneration:GLtype
 
 
----glHint() target
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glHint.xml
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glGet.xml
 ---@class glHint_target:GLtype
 
 
----glHint() mode
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glHint.xhtml
 ---@class glHint_mode:GLtype
 
 
----Light Specification
+---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glLight.xml
 ---@class glLightSpecification:GLtype
 
 
 ---Shader type\
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramPipeline.xhtml\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glShaderType:GLtype
 
 
 ---Geometry shader parameter\
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glGeometryShaderParameter:GLtype
 
 
 ---Tesselation control shader parameter\
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPatchParameter.xhtml\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glTesselationControlShaderParameter:GLtype
 
 
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glBlendFunc.xhtml
 ---@class glBlendingFactor: glBlendingFactorDest
 ---@class glBlendingFactor: glBlendingFactorSrc
 
 ---@class glBufferBit: glClearBit
 ---@class glBufferBit: glPushAttrib
 
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glStencilFunc.xhtml
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glDepthFunc.xhtml
+---https://registry.khronos.org/OpenGL-Refpages/gl4/html/glTexParameter.xhtml
 ---@class glFunction: glAlphaFunction
 ---@class glFunction: glDepthFunction
