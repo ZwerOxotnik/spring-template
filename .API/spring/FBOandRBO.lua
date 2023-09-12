@@ -104,9 +104,9 @@
 ---@field drawbuffers FBOattachment[]
 
 
----WARNING: maybe wrong information about types
----
----[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO)
+---WARNING: maybe wrong information about types\
+---[opengl/wiki/Framebuffer_Object](https://www.khronos.org/opengl/wiki/Framebuffer_Object)\
+---[springrts.com/wiki/Lua_FBO_and_RBO](https://springrts.com/wiki/Lua_FBO_and_RBO)
 ---@class _fbo: userdata
 ---@class _fbo: fbo
 ---@field readbuffer FBOattachment
