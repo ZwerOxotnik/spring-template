@@ -31,6 +31,46 @@
 ---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#UnsafeSetFBO)
 ---@field UnsafeSetFBO fun(fbo: _fbo, target: FBOtarget?, identities: boolean?): previouslyBoundRawFboId: number
 ---@field UnsafeSetFBO fun(nil, target: FBOtarget?, rawFboId: number?)
+---Not available for LuaParser, LuaRules/Gaia (synced)\
+---Replaces UnsafeSetFBO starting from 104.0.1-1003-gb3e02a6 maintenance\
+--- ( nil [, number target = GL_FRAMEBUFFER_EXT ] [, number rawFboId = 0] ) -> nil (Bind default or specified via rawFboId numeric id of FBO)\
+--- ( fbo [, number target = fbo.target ] ) -> number previouslyBoundRawFboId
+---
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#RawBindFBO)
+---@field RawBindFBO fun(fbo: _fbo, target: FBOtarget?): previouslyBoundRawFboId: number
+---@field RawBindFBO fun(nil, target: FBOtarget?, rawFboId: number?)
+
+---Not available for LuaParser, LuaRules/Gaia (synced)\
+---needs GLEW_EXT_framebuffer_blit
+---
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#BlitFBO)
+---@field BlitFBO fun(x0Src: int, y0Src: int, x1Src: int, y1Src: int, x0Dst: int, y0Dst: int, x1Dst: int, y1Dst: int, mask: glClearBit?)
+---@field BlitFBO fun(x0Src: int, y0Src: int, x1Src: int, y1Src: int, x0Dst: int, y0Dst: int, x1Dst: int, y1Dst: int, mask: glClearBit, filter: glTextureFiltering)
+---@field BlitFBO fun(fboSrc: _fbo, x0Src: int, y0Src: int, x1Src: int, y1Src: int, fboDst: _fbo, x0Dst: int, y0Dst: int, x1Dst: int, y1Dst: int, mask: glClearBit?)
+---@field BlitFBO fun(fboSrc: _fbo, x0Src: int, y0Src: int, x1Src: int, y1Src: int, fboDst: _fbo, x0Dst: int, y0Dst: int, x1Dst: int, y1Dst: int, mask: glClearBit, filter: glTextureFiltering)
+
+
+---Not available for LuaParser, LuaRules/Gaia (synced)\
+---Frame Buffer Object
+---
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#DeleteRBO)
+---@class _FBO
+---Not available for LuaParser, LuaRules/Gaia (synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#DeleteRBO)
+---@field CreateRBO fun(xsize: int, ysize: int, data: CreateRBO.data): rbo: rbo
+---Not available for LuaParser, LuaRules/Gaia (synced)
+---
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#DeleteRBO)
+---@field DeleteRBO fun(rbo: rbo)
+
+
+---[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO#DeleteRBO)
+---@class CreateRBO.data: table
+---@field target FBOtarget
+---@field format FBOformat
+---any number here will result in creation of multisampled RBO
+---@field samples number?
 
 
 ---Not available for LuaParser, LuaRules/Gaia (synced)
@@ -89,4 +129,4 @@
 ---@field valid   boolean
 ---(Added in 104.0.1-1015-g8e36ef2 maintenance)
 ---will return globalRendering->msaaLevel for multisampled RBO or 0 otherwise
----@field samples number
+---@field samples number?
