@@ -118,9 +118,9 @@
 ---@alias attachment texture|rbo|table|nil
 
 
----WARNING: maybe wrong information
----
----[View documents](https://springrts.com/wiki/Lua_FBO_and_RBO)
+---WARNING: maybe wrong information\
+---[opengl/wiki/Renderbuffer_Object](https://www.khronos.org/opengl/wiki/Renderbuffer_Object)\
+---[springrts.com/wiki/Lua_FBO_and_RBO](https://springrts.com/wiki/Lua_FBO_and_RBO)
 ---@class rbo: userdata
 ---@field target  number
 ---@field format  FBOformat

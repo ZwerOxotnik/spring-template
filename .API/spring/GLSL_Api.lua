@@ -2,7 +2,8 @@
 ---@diagnostic disable
 
 
----These functions are ONLY available if the graphics adapter supports GLSL.
+---These functions are ONLY available if the graphics adapter supports GLSL.\
+---[wiki/Type_Qualifier_(GLSL)](https://www.khronos.org/opengl/wiki/Type_Qualifier_(GLSL)).
 ---
 ---Please test in your scripts if one of them exists before you use them. In headless mode, the gl. callouts are nil.
 ---

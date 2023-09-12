@@ -293,6 +293,7 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 
 
 ---Shader type\
+---[wiki/Type_Qualifier_(GLSL)](https://www.khronos.org/opengl/wiki/Type_Qualifier_(GLSL))\
 ---[OpenGL-Refpages/gl4/html/glGetProgramPipeline](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramPipeline.xhtml)\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glShaderType:GLtype
