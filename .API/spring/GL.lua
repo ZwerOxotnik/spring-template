@@ -273,7 +273,7 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 ---@class glTextureEnvironment:GLtype
 
 
----Texture Generation
+---Texture Generation\
 ---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glGetTexGen.xml
 ---https://registry.khronos.org/OpenGL-Refpages/gl2.1/xhtml/glTexGen.xml
 ---@class glTextureGeneration:GLtype
@@ -293,19 +293,19 @@ GL_STENCIL_ATTACHMENT_EXT = 0x8D20 --[[@as FBOattachment]]
 
 
 ---Shader type\
----https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramPipeline.xhtml\
+---[OpenGL-Refpages/gl4/html/glGetProgramPipeline](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgramPipeline.xhtml)\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glShaderType:GLtype
 
 
 ---Geometry shader parameter\
----https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml\
+---[OpenGL-Refpages/gl4/html/glGetProgram](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGetProgram.xhtml)\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glGeometryShaderParameter:GLtype
 
 
 ---Tesselation control shader parameter\
----https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPatchParameter.xhtml\
+---[OpenGL-Refpages/gl4/html/glPatchParameter](https://registry.khronos.org/OpenGL-Refpages/gl4/html/glPatchParameter.xhtml)\
 ---Available for spring versions >= 104.0.1-596 (maintenance).
 ---@class glTesselationControlShaderParameter:GLtype
 
