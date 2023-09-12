@@ -60,6 +60,16 @@
 ---@class projectileID: number
 ---@class featureID: number
 ---@class unitDefID: number
+---@class moveID: number
 ---@class teamID: number
 ---@class texture: string
 ---@class font: userdata
+
+
+---WARNING: maybe wrong types
+---
+---[wiki/Lua_PathFinder#GetPathWayPoints](https://springrts.com/wiki/Lua_PathFinder#GetPathWayPoints)
+---@class waypointIndices
+---@field [1] number # startIdxOfDetailedPath
+---@field [2] number # startIdxOfDetailedEstimatedPath1
+---@field [3] number # startIdxOfDetailedEstimatedPath2

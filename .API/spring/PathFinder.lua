@@ -1,0 +1,81 @@
+---@meta
+---@diagnostic disable
+
+
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.
+---
+---[springrts.com/wiki/Lua_PathFinder](https://springrts.com/wiki/Lua_PathFinder)
+---@class PathFinder
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.
+---```
+---( string "MoveTypeName" | number moveID,
+---number start_x, number start_y, number start_z,
+---number end_x,   number end_y,   number end_z
+---[, number radius = 8 ]
+---) -> nil | pathObject path
+---```
+---
+---[wiki/Lua_PathFinder#RequestPath](https://springrts.com/wiki/Lua_PathFinder#RequestPath)
+---@field RequestPath fun(moveID: moveID, start_x, start_y: number, start_z: number, end_x: number, end_y: number, end_z: number, radius: number?): path: pathObject?
+---@field RequestPath fun(MoveTypeName: string, start_x, start_y: number, start_z: number, end_x: number, end_y: number, end_z: number, radius: number?): path: pathObject?
+
+
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.\
+---The following functions allow manipulating the cost of nodes visited by the pathfinding algorithm through numbered additive overlays (arrays).\
+---Only one overlay can be active at once, but as many as desired may be created with InitPathNodeCostsArray.\
+---The active layer is set by SetPathNodeCosts.\
+---NOTE: There are separate arrays for synced & unsynced! - don't ask when the unsynced one is used ... -\
+---IMPORTANT: the size of a newly created layer can be arbitrary, but ideally should match the heightmap dimensions.
+---
+---[springrts.com/wiki/Lua_PathFinder](https://springrts.com/wiki/Lua_PathFinder)
+---@class PathNodeCosts
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.
+---
+---[springrts.com/wiki/Lua_PathFinder#InitPathNodeCostsArray](https://springrts.com/wiki/Lua_PathFinder#InitPathNodeCostsArray)
+---@field InitPathNodeCostsArray fun(arrayID: number, numNodesX: number, numNodesZ: number): success: boolean
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.
+---
+---[springrts.com/wiki/Lua_PathFinder#FreePathNodeCostsArray](https://springrts.com/wiki/Lua_PathFinder#FreePathNodeCostsArray)
+---@field FreePathNodeCostsArray fun(arrayID: number): success: boolean
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.
+---
+---[springrts.com/wiki/Lua_PathFinder#SetPathNodeCosts](https://springrts.com/wiki/Lua_PathFinder#SetPathNodeCosts)
+---@field SetPathNodeCosts fun(arrayID: number): success: boolean
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.\
+---New in 104.0
+---
+---[springrts.com/wiki/Lua_PathFinder#GetPathNodeCosts](https://springrts.com/wiki/Lua_PathFinder#GetPathNodeCosts)
+---@field GetPathNodeCosts fun(arrayID: number): overlayCosts: table?
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.\
+---New in 104.0
+---
+---[springrts.com/wiki/Lua_PathFinder#SetPathNodeCost](https://springrts.com/wiki/Lua_PathFinder#SetPathNodeCost)
+---@field SetPathNodeCost fun(arrayID: number, nodeArrayIndex: number, cost: number): success: boolean
+---Available for LuaRules/Gaia (synced/unsynced) LuaUI only.\
+---GetPathNodeCost ALWAYS takes heightmap coordinates as arguments, which are internally converted to the resolution of the active node-overlay (if any).
+---
+---[springrts.com/wiki/Lua_PathFinder#GetPathNodeCost](https://springrts.com/wiki/Lua_PathFinder#GetPathNodeCost)
+---@field GetPathNodeCost fun(arrayID: number, heightMapX: number, heightMapZ: number): nodeCost: number
+
+
+---@class pathObject: userdata
+---GetPathWayPoints() returns 2 tables: 1 table with the waypoints and 1 table with 3 indices (in the waypoint table) when a new (more lazy) pathfinding algorithm begins.\
+---So the waypoint table contains 3 different levels of details.
+---
+---Note that Path in Path:GetPathWayPoints and Path:Next is not part of the command,\
+---but rather a reference to the path Object created by Spring.RequestPath.\
+---It must match the path Object (case sensitive).
+---
+---[wiki/Lua_PathFinder#GetPathWayPoints](https://springrts.com/wiki/Lua_PathFinder#GetPathWayPoints)
+---@field GetPathWayPoints fun(): XYZ[], waypointIndices
+---@field GetPathWayPoints fun()
+---Path:Next() returns the next waypoint in the path.\
+---Unlike GetPathWayPoints() in which the resolution of the waypoints decreases, Next updates the path so the resolution will increase as it approaches the target.
+---
+---Note that Path in Path:GetPathWayPoints and Path:Next is not part of the command,\
+---but rather a reference to the path Object created by Spring.RequestPath.\
+---It must match the path Object (case sensitive).
+---
+---[wiki/Lua_PathFinder#Next](https://springrts.com/wiki/Lua_PathFinder#Next)
+---@field Next fun(pos_x: number, pos_y: number, pos_z: number, radius: number?): x: number, y: number, z: number
+---@field Next fun()
