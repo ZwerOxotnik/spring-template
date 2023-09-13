@@ -2,7 +2,7 @@
 ---@diagnostic disable
 
 
----Works everywhere, but there are exceptions for functions and field in LuaRules/Gaia\
+---Works everywhere, but there are exceptions for some functions and fields in LuaRules/Gaia\
 ---Although Spring can access the filesystem directly (via os module) it is more common that you would want to access files included with your game or Spring.\
 ---Trouble is, most of these files are compressed into archives (.sdz/.sd7) so random access would generally be a difficult procedure.\
 ---Fortunately, the Spring Lua system automatically provides access to mod and base files via the VFS module.
