@@ -1,0 +1,371 @@
+---@meta
+---@diagnostic disable
+
+
+---Works everywhere, but there are exceptions for functions and field in LuaRules/Gaia\
+---Although Spring can access the filesystem directly (via os module) it is more common that you would want to access files included with your game or Spring.\
+---Trouble is, most of these files are compressed into archives (.sdz/.sd7) so random access would generally be a difficult procedure.\
+---Fortunately, the Spring Lua system automatically provides access to mod and base files via the VFS module.
+---
+---The VFS module doesn't simply open archives though.\
+---What it does is map your game files, game dependencies and Spring content onto a virtual file tree. All archives start from the 'roots' of the tree and share the same virtual space, meaning that if two or more archives contain the same resource file name the resources overlap and only one of the files will be retrieved.\
+---Overlapping directories on the other hand are merged so the resulting virtual directory contains the contents of both.\
+---Here is an example of how this works:
+---```txt
+---Archive 1 (games/mygame.sd7)
+---
+---textures
+---|__ texture1.png
+---models
+---|__ model1.mdl
+---Archive 2 (base/springcontent.sdz
+---
+---textures
+---|__ texture1.png
+---|__ texture2.png
+---|__ texture3.png
+---VFS
+---
+---textures
+---|__ texture1.png
+---|__ texture2.png
+---|__ texture3.png
+---models
+---|__ model1.mdl
+---```
+---This raises the question: If both archives have a texture1.png then which texture1.png is retreived via the VFS?\
+---The answer depends on the order the archives are loaded and the VFS mode (more on modes below).\
+---Generally however, each archive loaded overrides any archives loaded before it.\
+---The standard order of loading (from first to last) is:
+---```md
+---1. The main Spring/ game directory.
+---2. The automatic dependencies springcontent.sdz and maphelper.sdz.
+---3. Dependencies listed in your modinfo.lua (or modinfo.tdf), in the order listed.
+---4. Your mod archive.
+---```
+---
+---The Pack- and Unpack-functions are used to convert numbers->strings and strings->numbers.\
+----So you can read a binary file and then convert the received strings back to numbers and the other way around.\
+---Also you can use it in combination with the SendLuaXYZMsg-functions.
+---
+---Additional functions are available as part of the [UnsyncedCtrl](https://springrts.com/wiki/Lua_UnsyncedCtrl#.28Virtual-.29FileSystem).
+---
+---[VFSModes.h](https://github.com/spring/spring/blob/develop/rts/System/FileSystem/VFSModes.h)
+---, [wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS)
+---@class VFS
+---Not available for LuaRules/Gaia (synced)
+---
+---Only select uncompressed files.
+---@field RAW  "r" | VFSmode
+---Not available for LuaRules/Gaia (synced)\
+---New in 104.0
+---@field MOD  "M" | VFSmode
+---Not available for LuaRules/Gaia (synced)\
+---New in 104.0
+---@field MAP  "m" | VFSmode
+---Not available for LuaRules/Gaia (synced)\
+---New in 104.0
+---@field BASE "b" | VFSmode
+---Not available for LuaRules/Gaia (synced)\
+---New in 104.0
+---@field MENU "e" | VFSmode
+---Not available for LuaRules/Gaia (synced)
+---
+---Only select compressed files (.sdz,.sd7).
+---@field ZIP  "Mb"| VFSmode
+---Not available for LuaRules/Gaia (synced)
+---Try uncompressed files first, then compressed.
+---@field RAW_FIRST  "rMmeb" | VFSmode
+---Not available for LuaRules/Gaia (synced)
+---
+---Try compressed files first, then uncompressed.
+---@field ZIP_FIRST  "Mmebr" | VFSmode
+---Not available for LuaRules/Gaia (synced)
+---
+---Deprecated. Same as VFS.RAW
+---@field RAW_ONLY "r" | VFSmode
+---@field ZIP_ONLY "Mb"| VFSmode # Deprecated. Same as VFS.ZIP
+---Not available for LuaRules/Gaia (synced)
+---
+---WARNING: perhaps, wrong information.
+---
+---(if enviroment=nil then its uses current one)
+---
+---The environment arg sets the global environment (see generic lua refs).\
+---In almost all cases, this should be left nil to preserve Springs default.
+---
+---If nil then the env will be _G (global environment) If the optional env argument is provided any non-local variables and functions defined in filename.lua are then accessable via env or _G.\
+---Vise-versa, any variables defined in env prior to passing to VFS.Include are available to code in the included file.\
+---Code running in filename.lua will see the contents of env in place of the normal _G environment.
+---
+---This loads and compiles the lua code from a file in the VFS.\
+---The path is relative to the main Spring directory, e.g. VFS.Include('LuaUI/includes/filename.lua', nil, [vfsmode])
+---
+--VFS modes are single char strings and can be concatenated; doing specifies an order of preference for the mode (=location) from which to include files.
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#Include)
+---@field Include fun(filename: string, enviroment: table?): any
+---@field Include fun(filename: string, enviroment: table, mode: VFSmode): any
+---Not available for LuaRules/Gaia (synced)
+---
+---Example: `VFS.FileExists("maps/Castles.sdz") then ... end`\
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#LoadFile)
+---@field LoadFile fun(filename: string, mode: VFSmode?): boolean
+---Not available for LuaRules/Gaia (synced)
+---
+---Pattern is "*" by default.
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#DirList)
+---@field DirList fun(directory: string, pattern: string, mode: VFSmode?): filenames: string[]
+---Not available for LuaRules/Gaia (synced)
+---\
+---Pattern is "*" by default.
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#SubDirs)
+---@field SubDirs fun(directory: string, pattern: string, mode: VFSmode?): subdirs: string[]
+---Not available for LuaRules/Gaia (synced)
+---
+---Gets a list of all Spring AIs.\
+---The optional gameName and mapName parameters can be used to include game/map specific LuaAIs in the list.
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetAvailableAIs)
+---@field GetAvailableAIs fun(gameName: string?, mapName: string?): subdirs: GetAvailableAIs.AI[]
+---Unsynced only!\
+---WARNING: perhaps wrong information.
+---
+---Loads an archive **temporarely** in the VFS and then runs the given lua_function,\
+---which can make usage of the files in the archive.\
+---
+---Returns from the given lua_function
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UseArchive)
+---@field UseArchive fun(filename: string, mode: VFSmode?, func: function, ...: any?): ...: any?
+---Unsynced only!\
+---WARNING: perhaps wrong information.
+---
+---Permanently loads an archive into the VFS (to load zipped music collections etc.).\
+---Does nothing if the archive is already loaded in the VFS (won't reload even if there are changes made to the archive).\
+---If checksum is given it checks if the to be loaded file is correct,\
+---if not then it won't load it and return false.
+---
+---( string "filename/modname of archive", [string checksum of archive] )
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#MapArchive)
+---@field MapArchive fun(archivePath: string, checksum: string?): boolean
+---Unsynced only!\
+---New in 98.0
+---
+---Removes an already loaded archive (see VFS.MapArchive)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnmapArchive)
+---@field UnmapArchive fun(archivePath: string): boolean
+---Unsynced only!
+---
+---Compresses the specified folder.\
+---archiveType defines the compression type which can currently be only "zip"\
+---includeFolder specifies whether the archive should have the specified folder as root (defaults to false)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#CompressFolder)
+---@field CompressFolder fun(folderPath: string, archiveType: string?, compressedFilePath: string?, includeFolder: boolean?, mode: VFSmode?)
+---Unsynced only!\
+---New in 105.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetFileAbsolutePath)
+---@field GetFileAbsolutePath fun(filename: string, mode: VFSmode?): absPath: string?
+---Unsynced only!\
+---New in 105.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetArchiveContainingFile)
+---@field GetArchiveContainingFile fun(filename: string, mode: VFSmode?): archiveNameWithVersion: string?
+---Not available for LuaRules/Gaia (synced)\
+---New in 101.0
+---
+---Calculates hash (in base64 form) of a given string (with md5 support initially).\
+---Note supplying 0 (MD5) as hashType is mandatory
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#CalculateHash)
+---@field CalculateHash fun(input: string, hashType: number): md5hash: string
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetMaps)
+---@field GetMaps fun(): maps: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetGames)
+---@field GetGames fun(): games: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetAllArchives)
+---@field GetAllArchives fun(): archives: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 105.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetLoadedArchives)
+---@field GetLoadedArchives fun(): archives: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 105.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetArchivePath)
+---@field GetArchivePath fun(archiveName: string): paths: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 105.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetNameFromRapidTag)
+---@field GetNameFromRapidTag fun(rapidTag: string): archives: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#HasArchive)
+---@field HasArchive fun(archiveName: string): boolean
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#HasArchive)
+---@field GetArchiveInfo fun(archiveName: string): ArchiveInfo
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetArchiveChecksum)
+---@field GetArchiveChecksum fun(archiveName: string): singleArchiveChecksum: string, completeArchiveChecksum: string
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetArchiveDependencies)
+---@field GetArchiveDependencies fun(archiveName: string): archiveNames: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 98.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#GetArchiveReplaces)
+---@field GetArchiveReplaces fun(archiveName: string): archiveNames: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 101.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#DownloadArchive)
+---@field DownloadArchive fun(name: string, category: DownloadArchive.category): archiveNames: string[]
+---Not available for LuaRules/Gaia (synced)\
+---New in 104.0
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#AbortDownload)
+---@field AbortDownload fun(id: number): foundAndRemoved: boolean
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackU8)
+---@field PackU8 fun(...: uint8): string
+---@field PackU8 fun(numbers: uint8[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackU16)
+---@field PackU16 fun(...: uint16): string
+---@field PackU16 fun(numbers: uint16[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackU32)
+---@field PackU32 fun(...: uint): string
+---@field PackU32 fun(numbers: uint[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackS8)
+---@field PackS8 fun(...: int8): string
+---@field PackS8 fun(numbers: int8[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackS16)
+---@field PackS16 fun(...: int16): string
+---@field PackS16 fun(numbers: int16[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackS32)
+---@field PackS32 fun(...: int): string
+---@field PackS32 fun(numbers: int[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#PackF32)
+---@field PackF32 fun(...: float): string
+---@field PackF32 fun(numbers: float[]): string
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackU8)
+---@field UnpackU8 fun(binary: string, position: number?, count: number?): number:uint8[]
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackU16)
+---@field UnpackU16 fun(binary: string, position: number?, count: number?): number:uint16[]
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackU32)
+---@field UnpackU32 fun(binary: string, position: number?, count: number?): number:uint[]
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackS8)
+---@field UnpackS8 fun(binary: string, position: number?, count: number?): number:int8[]
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackS16)
+---@field UnpackS16 fun(binary: string, position: number?, count: number?): number:int16[]
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackS32)
+---@field UnpackS32 fun(binary: string, position: number?, count: number?): number:int[]
+---Not available for LuaRules/Gaia (synced)
+---
+---position is 1 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackF32)
+---@field UnpackF32 fun(binary: string, position: number?, count: number?): number:float[]
+
+
+---@type VFS
+VFS = VFS
+
+
+---@alias DownloadArchive.category
+---| "map"
+---| "game"
+---| "engine"
+
+
+---WARNING: perhaps wrong information about types
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS)
+---@class ArchiveInfo
+---@field name        string
+---@field shortname   string
+---@field version     string
+---@field mutator     string
+---@field game        string
+---@field shortgame   string
+---@field description string
+---@field mapfile     string
+---@field modtype     ArchiveInfo.modtype
+
+
+---@alias ArchiveInfo.modtype
+---| 0 # hidden
+---| 1 # primary
+---| 3 # map
+
+
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS)
+---@class VFSmode: string
+
+
+---WARNING: missing information, perhaps wrong types.
+---@class GetAvailableAIs.AI: table
+---@field shortName string?
+---@field version   string

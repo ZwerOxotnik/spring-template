@@ -23,6 +23,17 @@
 ---@operator sub:int8
 ---@operator mul:int8
 
+
+---16-bit signed integer. Possible values are -32'768 to 32'767
+---@class int16:integer
+---@operator unm:int16
+---@operator mod:int16
+---@operator add:int16
+---@operator div:int16
+---@operator sub:int16
+---@operator mul:int16
+
+
 ---32-bit unsigned integer. Possible values are 0 to 4'294'967'295.
 ---@class uint:integer
 ---@operator unm:int
