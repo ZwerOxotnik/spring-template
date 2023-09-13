@@ -291,43 +291,53 @@
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackU8)
----@field UnpackU8 fun(binary: string, position: number?, count: number?): number:uint8[]
+---@field UnpackU8 fun(binary: string, position: number?, count: number?): number: uint8[]
 ---Not available for LuaRules/Gaia (synced)
 ---
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackU16)
----@field UnpackU16 fun(binary: string, position: number?, count: number?): number:uint16[]
+---@field UnpackU16 fun(binary: string, position: number?, count: number?): number: uint16[]
 ---Not available for LuaRules/Gaia (synced)
 ---
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackU32)
----@field UnpackU32 fun(binary: string, position: number?, count: number?): number:uint[]
+---@field UnpackU32 fun(binary: string, position: number?, count: number?): number: uint[]
 ---Not available for LuaRules/Gaia (synced)
 ---
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackS8)
----@field UnpackS8 fun(binary: string, position: number?, count: number?): number:int8[]
+---@field UnpackS8 fun(binary: string, position: number?, count: number?): number: int8[]
 ---Not available for LuaRules/Gaia (synced)
 ---
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackS16)
----@field UnpackS16 fun(binary: string, position: number?, count: number?): number:int16[]
+---@field UnpackS16 fun(binary: string, position: number?, count: number?): number: int16[]
 ---Not available for LuaRules/Gaia (synced)
 ---
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackS32)
----@field UnpackS32 fun(binary: string, position: number?, count: number?): number:int[]
+---@field UnpackS32 fun(binary: string, position: number?, count: number?): number: int[]
 ---Not available for LuaRules/Gaia (synced)
 ---
 ---position is 1 by default
 ---
 ---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#UnpackF32)
----@field UnpackF32 fun(binary: string, position: number?, count: number?): number:float[]
+---@field UnpackF32 fun(binary: string, position: number?, count: number?): number: float[]
+---unsynced only!
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#ZlibCompress)
+---@field ZlibCompress fun(uncompressedStr: string): compressedStr: string?
+---Works everywhere???
+---
+---uncompressedSize is 65500 by default
+---
+---[wiki/Lua_VFS](https://springrts.com/wiki/Lua_VFS#ZlibDecompress)
+---@field ZlibDecompress fun(compressedStr: string, uncompressedSize: number?): uncompressedStr: string?
 
 
 ---@type VFS
