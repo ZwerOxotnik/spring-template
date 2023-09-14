@@ -4,7 +4,7 @@
 
 ---[View documents](https://springrts.com/wiki/Lua_WeaponDefs)
 ---@class WeaponDef
----@field id number
+---@field id weaponDefID
 ---Key-names of the customParams table written must be lowercase
 ---@field customParams table<string, string>?
 
@@ -22,3 +22,6 @@ WeaponDefs = WeaponDefs
 ---[View documents](https://springrts.com/wiki/Lua_WeaponDefs)
 ---@type table<string, metatable<string, string|number|table|boolean>|WeaponDef>
 WeaponDefNames = WeaponDefNames
+
+
+---@class weaponDefID: number

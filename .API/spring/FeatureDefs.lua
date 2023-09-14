@@ -4,7 +4,7 @@
 
 ---[View documents](https://springrts.com/wiki/Lua_FeatureDefs)
 ---@class FeatureDef
----@field id number
+---@field id featureDefID
 ---Key-names of the customParams table written must be lowercase
 ---@field customParams table<string, string>?
 
@@ -22,3 +22,6 @@ FeatureDefs = FeatureDefs
 ---[View documents](https://springrts.com/wiki/Lua_FeatureDefs)
 ---@type table<string, metatable<string, string|number|table|boolean>|FeatureDef>
 FeatureDefNames = FeatureDefNames
+
+
+---@class featureDefID: number

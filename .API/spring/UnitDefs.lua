@@ -4,7 +4,7 @@
 
 ---[View documents](https://springrts.com/wiki/Lua_UnitDefs)
 ---@class UnitDef
----@field id number
+---@field id unitDefID
 ---@field name string
 ---@field weapons WeaponDef
 ---Key-names of the customParams table written must be lowercase
@@ -25,3 +25,5 @@ UnitDefs = UnitDefs
 ---@type table<string, metatable<string, string|number|table|boolean>|UnitDef>
 UnitDefNames = UnitDefNames
 
+
+---@class unitDefID: number
