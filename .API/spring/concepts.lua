@@ -24,13 +24,13 @@
 ---@field a number
 
 ---rgba
----@class color.3
+---@class RGBA
 ---@field [1] number r
 ---@field [2] number g
 ---@field [3] number b
 ---@field [4] number a
 
----@alias color color.0|color.1|color.2|color.3
+---@alias color color.0|color.1|color.2|RGBA
 
 
 ---eg {0.0, 0.0, 0.0}

@@ -417,6 +417,66 @@
 ---
 ---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetVideoCapturingMode)
 ---@field SetVideoCapturingTimeOffset fun(timeOffset: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 104.0
+---
+---WARNING: probably, wrong information!
+---
+---New in 104.0: fun(unitID: unitID)
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#DrawUnitCommands)
+---@field DrawUnitCommands fun(unitID: unitID)
+---@field DrawUnitCommands fun(units: unitID[], false)
+---@field DrawUnitCommands fun(units: table<unitID, boolean>, true)
+---For LuaRules/Gaia, LuaUI only.
+---
+---WARNING: probably, wrong information!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetTeamColor)
+---@field SetTeamColor fun(unitID: unitID, r: number, g: number, b: number)
+---For LuaRules/Gaia, LuaUI only.
+---
+---WARNING: probably, wrong information.
+---
+--- Note, that `iconFileName` is not the full filename instead it is like this: `Anims/cursorattack_0.bmp`\
+---overwrite is true by default\
+---hotSpotTopLeft is false by default
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#AssignMouseCursor)
+---@field AssignMouseCursor fun(cmdName: string, iconFileName: string, overwrite: boolean?, hotSpotTopLeft: false?): assigned: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---WARNING: probably, wrong information!
+---
+---`hotSpotTopLeft` is false by default.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#ReplaceMouseCursor)
+---@field ReplaceMouseCursor fun(oldFileName: string, newFileName: string, hotSpotTopLeft: boolean): assigned: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---WARNING: probably, wrong information!
+---
+---Register your custom cmd so it gets visible in the unit's cmd queue
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetCustomCommandDrawData)
+---@field SetCustomCommandDrawData fun(cmdID: CMDTYPE, cmdID_cloneIcon: CMDTYPE, RGBA: color.2, showArea: boolean?): assigned: boolean?
+---@field SetCustomCommandDrawData fun(cmdID: CMDTYPE, iconname: string, RGBA: color.2, showArea: boolean?): assigned: boolean?
+---LuaGadgets only!
+---
+---`shareLevel` is 0<= x <= 1 .
+---
+---WARNING: probably, wrong information!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetShareLevel)
+---@field SetShareLevel fun(resourceName: ShareResources.type.0, shareLevel: number)
+---LuaGadgets only!
+---
+---WARNING: perhaps, wrong information!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#ShareResources)
+---@field ShareResources fun(teamID: teamID, type: ShareResources.type.1)
+---@field ShareResources fun(teamID: teamID, type: ShareResources.type.0, amount: float)
 
 
 ---@alias Log.logLevel
@@ -428,6 +488,17 @@
 ---| "fatal"   | LOG.FATAL
 ---| number
 
+---@alias ShareResources.type.0
+---| "m"      # same as "m"
+---| "metal"  # same as "metal"
+---| "e"      # same as "energy"
+---| "energy" # same as "e"
+
+---@alias ShareResources.type.1
+---| "u"      # same as "units"
+---| "units"  # same as "u"
+
+---@alias ShareResources.type ShareResources.type.0 | ShareResources.type.1
 
 ---@alias PlaySoundFile.channel
 ---| "general" # (default)
