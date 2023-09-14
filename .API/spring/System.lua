@@ -133,12 +133,23 @@
 ---The main environment for toggleable UI elements and controls ("widgets").
 ---| "LuaUI"
 ---The main environment for synced game-controlling mechanics ("gadgets").
+---
+---[LuaHandle.cpp](https://github.com/spring/spring/blob/develop/rts/Lua/LuaHandle.cpp),\
+--- [LuaHandleSynced.cpp](https://github.com/spring/spring/blob/develop/rts/Lua/LuaHandleSynced.cpp)
 ---| "LuaRules"
 ---As LuaRules but for maps.
+---
+---[LuaGaia.cpp](https://github.com/spring/spring/blob/develop/rts/Lua/LuaGaia.cpp)
 ---| "LuaGaia"
 ---Introduced in 104.0, a stripped down environment that starts before the game is loaded and persists through reload.
+---
+---[LuaMenu.cpp](https://github.com/spring/spring/blob/106.0/rts/Lua/LuaMenu.cpp)
 ---| "LuaMenu"
 ---Introduced in 95.0, to allow visual customisation of the loading process.
+---
+---[LuaIntro.cpp](https://github.com/spring/spring/blob/develop/rts/Lua/LuaIntro.cpp)
 ---| "LuaIntro"
 ---Minimal environment used to parse and load definition files.
+---
+---[LuaParser.cpp](https://github.com/spring/spring/blob/develop/rts/Lua/LuaParser.cpp)
 ---| "LuaParser"
