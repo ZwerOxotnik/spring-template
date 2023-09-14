@@ -80,15 +80,18 @@
 ---@field WAITCODE_GATHER 4|CMDwaitcode
 
 
----@type CMD|table<CMDTYPE, string>
+---@type CMD|table<CMDTYPE, cmdName>
 CMD = CMD
 
 
----[View documents](https://springrts.com/wiki/Lua_ConstGL)
----@class CMDTYPE:uint
+---@class cmdName: string
 
----@class CMDoption:CMDTYPE
----@class CMDwaitcode:CMDTYPE
+
+---[View documents](https://springrts.com/wiki/Lua_ConstGL)
+---@class CMDTYPE: uint
+
+---@class CMDoption:   CMDTYPE
+---@class CMDwaitcode: CMDTYPE
 
 
 ---@class CommandType: CMDTYPE
