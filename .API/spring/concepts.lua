@@ -2,25 +2,35 @@
 ---@diagnostic disable
 
 
+---rgb(a) by keys
 ---@class color.0
 ---@field r number
 ---@field g number
 ---@field b number
 ---@field a number?
 
+---rgb(a)
 ---@class color.1
 ---@field [1] number  r
 ---@field [2] number  g
 ---@field [3] number  b
 ---@field [4] number? a
 
+---rgba by keys
 ---@class color.2
 ---@field r number
 ---@field g number
 ---@field b number
 ---@field a number
 
----@alias color color.0|color.1|color.2
+---rgba
+---@class color.3
+---@field [1] number r
+---@field [2] number g
+---@field [3] number b
+---@field [4] number a
+
+---@alias color color.0|color.1|color.2|color.3
 
 
 ---eg {0.0, 0.0, 0.0}
@@ -65,7 +75,10 @@
 ---@class featureID: number
 ---@class playerID: number
 ---@class moveID: number
+---@class groupID: number
+---@class unitID: number
 ---@class teamID: number
+---@class cmdID: number # WARNING: perhaps it's wrong
 ---@class texture: string
 ---@class font: userdata
 

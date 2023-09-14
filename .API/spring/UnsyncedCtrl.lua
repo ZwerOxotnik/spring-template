@@ -182,6 +182,241 @@
 ---
 ---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetSoundStreamVolume)
 ---@field SetSoundStreamVolume fun(volume: volume)
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---Very important! (allows synced inter-lua-enviroment communications)
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SendLuaUIMsg)
+---@field SendLuaUIMsg fun(message: string, mode: SendLuaUIMsg.mode)
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---Very important! (allows synced inter-lua-enviroment communications)
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SendLuaGaiaMsg)
+---@field SendLuaGaiaMsg fun(message: string)
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---Very important! (allows synced inter-lua-enviroment communications)
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SendLuaRulesMsg)
+---@field SendLuaRulesMsg fun(message: string)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 83.0.
+---
+---Note there is nothing in this table due to "limitations" of the AI interface.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SendSkirmishAIMessage)
+---@field SendSkirmishAIMessage fun(aiTeam: teamID, message: string): nil|boolean|string[]
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 83.0.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitLeaveTracks)
+---@field SetUnitLeaveTracks fun(unitID: unitID, leaveTracks: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 104.0
+---
+---WARNING: perhaps, wrong information about types
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitSelectionVolumeData)
+---@field SetUnitSelectionVolumeData fun(featureID: featureID, scaleX: number, scaleY: number, scaleZ: number, offsetX: number, offsetY: number, offsetZ: number, vType: number, tType: number, Axis: number)
+---For LuaRules/Gaia, LuaUI only.
+---
+---WARNING: perhaps, wrong information about types
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SelectUnitMap)
+---@field SelectUnitMap fun(units: table<unitID, boolean|any>, append: boolean?)
+---For LuaRules/Gaia, LuaUI only.
+---
+---WARNING: perhaps, wrong information about types
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SelectUnitArray)
+---@field SelectUnitArray fun(units: unitID[], append: boolean?)
+---@field SelectUnitMap fun(units: table<unitID, boolean|any>, append: boolean?)
+---For LuaRules/Gaia, LuaUI only.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetDrawSelectionInfo)
+---@field SetDrawSelectionInfo fun(drawSelectionInfo: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitGroup)
+---@field SetUnitGroup fun(unitID: unitID, groupID: groupID)
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---Read [Lua_CMDs](https://springrts.com/wiki/Lua_CMDs) to undestand meaning of `param`
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrder)
+---@field GiveOrder fun(cmdID: CommandType, param: table<(nil|number)[]>, options: UnitOrder): success: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---Read [Lua_CMDs](https://springrts.com/wiki/Lua_CMDs) to undestand meaning of `param`
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrderToUnit)
+---@field GiveOrderToUnit fun(unitID: unitID, cmdID: CommandType, param: table<(nil|number)[]>, options: UnitOrder): success: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---WARNING: perhaps wrong information about `unitMap`.
+---
+---Read [Lua_CMDs](https://springrts.com/wiki/Lua_CMDs) to undestand meaning of `param`
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrderToUnitMap)
+---@field GiveOrderToUnitMap fun(unitMap: table<unitID, boolean>, cmdID: CommandType, param: table<(nil|number)[]>, options: UnitOrder): success: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---WARNING: perhaps wrong information about `unitMap`.
+---
+---Read [Lua_CMDs](https://springrts.com/wiki/Lua_CMDs) to undestand meaning of `param`
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrderToUnitArray)
+---@field GiveOrderToUnitArray fun(unitArray: unitID[], cmdID: CommandType, param: table<(nil|number)[]>, options: UnitOrder): success: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.
+---
+---WARNING: perhaps wrong information about `unitMap` and, probably, wrong info about `orderArray`.
+---
+---Read [Lua_CMDs](https://springrts.com/wiki/Lua_CMDs) to undestand meaning of `param`
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrderToUnitArray)
+---@field GiveOrderArrayToUnitMap fun(unitMap: table<unitID, boolean>, orderArray: GiveOrderArrayToUnitMap.orderArray): success: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---Needs ModUICtrl.\
+---"pairwise" paramater (New in version 89.0) is used to send multiple units a single individual command.
+---
+---WARNING: perhaps wrong information about `unitMap` and, probably, wrong info about `orderArray`.
+---
+---Read [Lua_CMDs](https://springrts.com/wiki/Lua_CMDs) to undestand meaning of `param`
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrderArrayToUnitMap)
+---@field GiveOrderArrayToUnitMap fun(unitArray: unitID[], orderArray: GiveOrderArrayToUnitMap.orderArray, pairwise: boolean?): success: boolean?
+---For LuaRules/Gaia, LuaUI only.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetBuildFacing)
+---@field SetBuildFacing fun(facing: number)
+---For LuaRules/Gaia, LuaUI only.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetBuildSpacing)
+---@field SetBuildSpacing fun(spacing: number)
+---For LuaGadgets only!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitNoDraw)
+---@field SetUnitNoDraw fun(unitID: unitID, noDraw: boolean)
+---For LuaGadgets only!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitNoSelect)
+---@field SetUnitNoSelect fun(unitID: unitID, noSelect: boolean)
+---For LuaGadgets only!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitNoMinimap)
+---@field SetUnitNoMinimap fun(unitID: unitID, noMinimap: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 101.0
+---
+---Controls whether a feature will fade or not when zoomed out.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetUnitGroup)
+---@field SetFeatureFade fun(featureID: featureID, allow: boolean)
+---For LuaGadgets only!
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetFeatureNoDraw)
+---@field SetFeatureNoDraw fun(featureID: featureID, noDraw: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 104.0
+---
+---WARNING: perhaps wrong information about types.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetFeatureSelectionVolumeData)
+---@field SetFeatureSelectionVolumeData fun(featureID: featureID, scaleX: number, scaleY: number, scaleZ: number, offsetX: number, offsetY: number, offsetZ: number, vType: number, tType: number, Axis: number)
+---For LuaRules/Gaia, LuaUI only.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetDrawSky)
+---@field SetDrawSky fun(drawSky: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetDrawWater)
+---@field SetDrawWater fun(drawWater: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetDrawGround)
+---@field SetDrawGround fun(drawGround: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---As of 104.0 no longer needs cheating enabled.
+---
+---Allows to change water params (mostly BumpWater ones) at runtime.\
+----You may want to set BumpWaterUseUniforms in your springrc to 1, then you don't even need to restart BumpWater via `/water 4`.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetWaterParams)
+---@field SetWaterParams fun(params: SetWaterParams.params)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 104.0
+---
+---Allows to change map rendering params at runtime.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetMapRenderingParams)
+---@field SetMapRenderingParams fun(params: SetMapRenderingParams.params)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 95.0
+---
+---See [infolog.txt](https://springrts.com/wiki/Infolog.txt) for possible log sections.
+---
+---WARNING: perhaps wrong information
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetLogSectionFilterLevel)
+---@field SetLogSectionFilterLevel fun(sectionName: string, logLevel: Log.logLevel)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 101.0
+---
+---`drawGroundForward` allows disabling of the forward pass.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetDrawGroundDeferred)
+---@field SetDrawGroundDeferred fun(drawGroundDeferred: boolean, drawGroundForward: boolean?)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 101.0
+---
+---`drawFeaturesForward`, `drawUnitsForward` allows disabling of the respective forward passes
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetDrawModelsDeferred)
+---@field SetDrawModelsDeferred fun(drawUnitsDeferred: boolean, drawFeaturesDeferred: boolean, drawUnitsForward: boolean?, drawFeaturesForward: boolean?)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 104.0
+---
+---This doesn't actually record the game in any way, it just regulates the framerate and interpolations.
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetVideoCapturingMode)
+---@field SetVideoCapturingMode fun(allowCaptureMode: boolean)
+---For LuaRules/Gaia, LuaUI only.
+---
+---New in 104.0
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetVideoCapturingMode)
+---@field SetVideoCapturingTimeOffset fun(timeOffset: boolean)
 
 
 ---@alias Log.logLevel
@@ -191,6 +426,7 @@
 ---| "warning" | LOG.WARNING
 ---| "error"   | LOG.ERROR
 ---| "fatal"   | LOG.FATAL
+---| number
 
 
 ---@alias PlaySoundFile.channel
@@ -205,3 +441,70 @@
 ---| "userinterface"
 ---| "ui"
 ---| 3 # (userinterface/ui)
+
+
+---@alias SendLuaUIMsg.mode
+---| "s"      # same as "specs"
+---| "specs"  # same as "s"
+---| "a"      # same as "allies"
+---| "allies" # same as "a"
+
+
+---@alias UnitOrder
+---| "alt"
+---| "ctrl"
+---| "shift"
+---| "right"
+
+
+---WARNING:  probably, wrong info
+---
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#GiveOrderToUnitArray)
+---@class GiveOrderArrayToUnitMap.orderArray
+---@field [1] cmdID
+---@field [2] table<(nil|number)[]>
+---@field [3] UnitOrder
+
+
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetWaterParams)
+---@class SetWaterParams.params
+---@field absorb        rgb
+---@field baseColor     rgb
+---@field minColor      rgb
+---@field surfaceColor  rgb
+---@field diffuseColor  rgb
+---@field specularColor rgb
+---@field planeColor    rgb
+---@field texture       string
+---@field foamTexture   string
+---@field normalTexture string
+---@field damage  number
+---@field repeatX number
+---@field repeatY number
+---@field surfaceAlpha   number
+---@field ambientFactor  number
+---@field diffuseFactor  number
+---@field specularFactor number
+---@field specularPower  number
+---@field fresnelMin     number
+---@field fresnelMax     number
+---@field fresnelPower   number
+---@field reflectionDistortion number
+---@field blurBase     number
+---@field blurExponent number
+---@field perlinStartFreq  number
+---@field perlinLacunarity number
+---@field perlinAmplitude  number
+---@field numTiles number
+---@field shoreWaves boolean
+---@field forceRendering boolean
+---@field hasWaterPlane boolean
+
+
+---[wiki](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetMapRenderingParams)
+---@class SetMapRenderingParams.params
+---@field splatTexMults  color.3
+---@field splatTexScales color.3
+---@field voidWater  boolean
+---@field voidGround boolean
+---@field splatDetailNormalDiffuseAlpha boolean
