@@ -53,6 +53,8 @@
 ---@field [3] float
 ---@field [4] float
 
+---@class volume: float # Ranged from 0.0 to 1.0
+
 
 ---@class shaderID: number
 ---@class locationID: number
@@ -61,6 +63,7 @@
 ---@class unitDefID: number
 ---@class projectileID: number
 ---@class featureID: number
+---@class playerID: number
 ---@class moveID: number
 ---@class teamID: number
 ---@class texture: string

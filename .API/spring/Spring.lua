@@ -2,7 +2,7 @@
 ---@diagnostic disable
 
 
----@class Spring
+---@class Spring: UnsyncedCtrl
 Spring = Spring
 
 
