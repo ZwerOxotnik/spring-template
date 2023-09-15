@@ -66,26 +66,27 @@
 ---@class volume: float # Ranged from 0.0 to 1.0
 
 
----@class shaderID: number
----@class locationID: number
+---@class shaderID:    number
+---@class locationID:  number
 ---@class weaponDefID: number
 ---@class moveDefID: number
 ---@class unitDefID: number
 ---@class projectileID: number
 ---@class featureID: number
----@class playerID: number
----@class moveID: number
----@class groupID: number
----@class unitID: number
----@class teamID: number
----@class cmdID: number # WARNING: perhaps it's wrong
----@class texture: string
----@class font: userdata
+---@class playerID:  number
+---@class moveID:    number
+---@class groupID:   number
+---@class unitID:    number
+---@class teamID:    number
+---@class gameID:    string # As of 101.0+ the string is encoded in hex.
+---@class cmdID:     number # WARNING: perhaps it's wrong
+---@class texture:   string
+---@class font:      userdata
 
 
 ---WARNING: maybe wrong types
 ---
----[wiki/Lua_PathFinder#GetPathWayPoints](https://springrts.com/wiki/Lua_PathFinder#GetPathWayPoints)
+---[Wiki/Lua_PathFinder#GetPathWayPoints](https://springrts.com/wiki/Lua_PathFinder#GetPathWayPoints)
 ---@class waypointIndices
 ---@field [1] number # startIdxOfDetailedPath
 ---@field [2] number # startIdxOfDetailedEstimatedPath1

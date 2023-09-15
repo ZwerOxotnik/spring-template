@@ -1,0 +1,717 @@
+---@meta
+---@diagnostic disable
+
+
+---[Wiki](https://springrts.com/wiki/Lua:Callins)
+---@class Callins
+---Called when the addon is (re)loaded.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#Initialize)
+---@field Initialize fun()
+---Called when the addon or the game is shutdown.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#Shutdown)
+---@field Shutdown fun()
+---Used to set the default command when a unit is selected.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DefaultCommand)
+---@field DefaultCommand fun(type: "unit", id: unitID): cmdID: CMDTYPE
+---@field DefaultCommand fun(type: "feature", id: featureID): cmdID: CMDTYPE
+---Called when a command is issued.\
+---Returning true deletes the command and does not send it through the network.
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#CommandNotify)
+---@field CommandNotify fun(cmdID: CMDTYPE, cmdParams, cmdOptions): removeCmd: boolean
+---Called when the command descriptions changed, e.g. when selecting or deselecting a unit.
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#CommandsChanged)
+---@field CommandsChanged fun()
+---The parameters can be "unit", unitID; "feature", featureID; "ground", posX, posY, posZ or "selection".
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#WorldTooltip)
+---@field WorldTooltip fun(ttType, data1, data2, data3): newTooltip: string
+---Called when the unsynced copy of the height-map is altered.
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnsyncedHeightMapUpdate)
+---@field UnsyncedHeightMapUpdate fun()
+---Called every 60 frames, calculating delta between GameFrame and GameProgress.\
+----Can give an ETA about catching up with simulation for mid-game join players.
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GameProgress)
+---@field GameProgress fun()
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GameSetup)
+---@field GameSetup fun(state, ready, playerStates): success: boolean, newReady: boolean
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#SunChanged)
+---@field SunChanged fun()
+---Called when text is entered into the console (e.g. Spring.Echo).
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AddConsoleLine)
+---@field AddConsoleLine fun(message: string, priority)
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AddConsoleLine)
+---@field RecvSkirmishAIMessage fun(aiTeam: teamID, dataStr: string)
+---Receives data sent via [SendToUnsynced](https://springrts.com/wiki/Lua_System#SendToUnsynced) callout.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#RecvFromSynced)
+---@field RecvFromSynced fun(...: nil|number|string|boolean)
+---Called when a chat command '/save' or '/savegame' is received.\
+---The single argument is a userdatum representing the savegame zip file.\
+---See [Lua_SaveLoad](https://springrts.com/wiki/Lua_SaveLoad#Save_.28_zip_.29_-.3E_nil).
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#Save)
+---@field Save fun(zip: zip)
+---For LuaIntro only.
+---
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#LoadProgress)
+---@field LoadProgress fun(message: string, replaceLastLine)
+---Currently implemented for widgets only.
+---
+---Called when a unit is added to or removed from a control group.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GroupChanged)
+---@field GroupChanged fun(groupID: groupID)
+---WARNING: not enough information!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#ConfigureLayout)
+---@field ConfigureLayout fun()
+---Called every Update. Must return true for Mouse* events and GetToolTip to be called.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#IsAbove)
+---@field IsAbove fun(x: number, y: number): isAbove: boolean
+---Called when IsAbove returns true.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#IsAbove)
+---@field GetTooltip fun(x: number, y: number): tooltip: string
+---Called repeatedly when a key is pressed down.\
+---If you want an action to occur only once check for isRepeat == false.\
+---Return true if you don't want other callins or the engine to also receive this keypress.\
+---A list of key codes can be seen at the [SDL wiki](https://wiki.libsdl.org/SDL2/SDLKeycodeLookup).
+---
+---WARNING: probably, wrong information!!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GetTooltip)
+---@field GetTooltip fun(key, mods: GetTooltip.mods, isRepeat: boolean): becomeOwner: string
+---Called when the key is released.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#KeyRelease)
+---@field KeyRelease fun(key): boolean
+---Called whenever a key press results in text input.
+---
+---New in 97.0.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#TextInput)
+---@field TextInput fun(utf8char)
+---WARNING: not enough information!!
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#JoystickEvent)
+---@field JoystickEvent fun()
+---Called when a mouse button is pressed.\
+---The button parameter supports up to 7 buttons.\
+---Must return true for MouseRelease and other functions to be called.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#MousePress)
+---@field MousePress fun(x: number, y: number, button): becomeMouseOwner: boolean
+---Called when a mouse button is released.\
+---Please note that in order to have Spring call MouseRelease, you need to have a MousePress call-in in the same addon that returns true.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#MouseRelease)
+---@field MouseRelease fun(x: number, y: number, button): becomeMouseOwner: boolean
+---Called when the mouse wheel is moved.\
+---The parameters indicate the direction and amount of travel.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#MouseWheel)
+---@field MouseWheel fun(up, value)
+---Called when the mouse is moved.\
+---The dx and dy parameters indicate the distance travelled, whereas the first two indicate the final position.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#MouseMove)
+---@field MouseMove fun(x, y, dx, dy, button)
+---Called whenever a player's status changes e.g. becoming a spectator.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#PlayerChanged)
+---@field PlayerChanged fun(playerID: playerID)
+---Called whenever a new player joins the game.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#PlayerAdded)
+---@field PlayerAdded fun(playerID: playerID)
+---Called whenever a player is removed from the game.
+---
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#PlayerRemoved)
+---@field PlayerRemoved fun(playerID: playerID, reason)
+---Called when a [Pr-downloader](https://springrts.com/wiki/Pr-downloader) download is started via [VFS.DownloadArchive](https://springrts.com/wiki/Lua_VFS#DownloadArchive).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DownloadStarted)
+---@field DownloadStarted fun(id: number)
+---Called when a [Pr-downloader](https://springrts.com/wiki/Pr-downloader) download finishes successfully.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DownloadFinished)
+---@field DownloadFinished fun(id: number)
+---Called when a [Pr-downloader](https://springrts.com/wiki/Pr-downloader) download fails to complete.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DownloadFailed)
+---@field DownloadFailed fun(id: number, errorID: number)
+---Called incrementally during a [Pr-downloader](https://springrts.com/wiki/Pr-downloader) download.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DownloadProgress)
+---@field DownloadProgress fun(id: number, downloaded, total)
+---Called whenever the window is resized.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#ViewResize)
+---@field ViewResize fun(viewSizeX: number, viewSizeY: number)
+---Called for every draw frame (including when the game is paused) and at least once per sim frame except when catching up.\
+---The parameter is the time since the last update.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#Update)
+---@field Update fun(dt: float)
+---Doesn't render to screen! Use this callin to update textures, shaders, etc.\
+---Also available to LuaMenu.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawGenesis)
+---@field DrawGenesis fun()
+---New in 104.0
+---
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorldPreParticles)
+---@field DrawWorldPreParticles fun()
+---Spring draws units, features, some water types, cloaked units, and the sun.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorldPreUnit)
+---@field DrawWorldPreUnit fun()
+---Spring draws command queues, 'map stuff', and map marks.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorld)
+---@field DrawWorld fun()
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorldShadow)
+---@field DrawWorldShadow fun()
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorldReflection)
+---@field DrawWorldReflection fun()
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorldRefraction)
+---@field DrawWorldRefraction fun()
+---Runs at the start of the forward pass when a custom map shader has been assigned via [Spring.SetMapShader](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetMapShader) (convenient for setting uniforms).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawWorldRefraction)
+---@field DrawGroundPreForward fun()
+---Runs at the start of the deferred pass when a custom map shader has been assigned via [Spring.SetMapShader](https://springrts.com/wiki/Lua_UnsyncedCtrl#SetMapShader) (convenient for setting uniforms).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawGroundPreDeferred)
+---@field DrawGroundPreDeferred fun()
+---This runs at the end of its respective deferred pass and allows proper frame compositing (with ground flashes/decals/foliage/etc, which are drawn between it and [DrawWorldPreUnit](https://springrts.com/wiki/Lua:Callins#API:DrawWorldPreUnit)) via [gl.CopyToTexture](https://springrts.com/wiki/Lua_OpenGL_Api#CopyToTexture).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawGroundPostDeferred)
+---@field DrawGroundPostDeferred fun()
+---Runs at the end of the unit deferred pass to inform Lua code it should make use of the $model_gbuffer_* textures before another pass overwrites them (and to allow proper blending with e.g. cloaked objects which are drawn between these events and [DrawWorld](https://springrts.com/wiki/Lua:Callins#API:DrawWorld) via [gl.CopyToTexture](https://springrts.com/wiki/Lua_OpenGL_Api#CopyToTexture)).\
+---N.B. The *PostDeferred events are only sent (and only have a real purpose) if forward drawing is disabled.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawUnitsPostDeferred)
+---@field DrawUnitsPostDeferred fun()
+---Runs at the end of the feature deferred pass to inform Lua code it should make use of the $model_gbuffer_* textures before another pass overwrites them (and to allow proper blending with e.g. cloaked objects which are drawn between these events and [DrawWorld](https://springrts.com/wiki/Lua:Callins#API:DrawWorld) via [gl.CopyToTexture](https://springrts.com/wiki/Lua_OpenGL_Api#CopyToTexture)).\
+---N.B. The *PostDeferred events are only sent (and only have a real purpose) if forward drawing is disabled.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawFeaturesPostDeferred)
+---@field DrawFeaturesPostDeferred fun()
+---WARNING: not enough information.
+---
+---Also available to LuaMenu.
+---
+---vsx, vsy are screen coordinates.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawScreen)
+---@field DrawScreen fun(vsx: number, vsy: number)
+---vsx, vsy are screen coordinates.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawScreenEffects)
+---@field DrawScreenEffects fun(vsx: number, vsy: number)
+---New in 104.0
+---
+---Similar to DrawScreenEffects, this can be used to alter the contents of a frame after it has been completely rendered (i.e. World, MiniMap, Menu, UI).
+---
+---vsx, vsy are screen coordinates.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawScreenEffects)
+---@field DrawScreenEffects fun(vsx: number, vsy: number)
+---New in 95.0
+---
+---Only available to LuaIntro, draws custom load screens.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawLoadScreen)
+---@field DrawLoadScreen fun()
+---sx, sy are values relative to the minimap's position and scale
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawInMinimap)
+---@field DrawInMinimap fun(sx: number, sy: number)
+---sx, sy are values relative to the minimap's position and scale
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawInMinimapBackground)
+---@field DrawInMinimapBackground fun(sx: number, sy: number)
+---For custom rendering of units, [enabled here](https://springrts.com/wiki/Lua_UnitRendering#Lua.27s_DrawXYZ-Callin).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawUnit)
+---@field DrawUnit fun(unitID: unitID, drawMode: drawMode): suppressEngineDraw: boolean
+---For custom rendering of features, [enabled here](https://springrts.com/wiki/Lua_UnitRendering#Lua.27s_DrawXYZ-Callin).
+---
+---WARNING: perhaps, wrong information
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawFeature)
+---@field DrawFeature fun(featureID: featureID, drawMode: drawMode): suppressEngineDraw: boolean
+---For custom rendering of weapon (& other) projectiles, [enabled here](https://springrts.com/wiki/Lua_UnitRendering#Lua.27s_DrawXYZ-Callin).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawProjectile)
+---@field DrawProjectile fun(projectileID: projectileID, drawMode: drawMode): suppressEngineDraw: boolean
+---For custom rendering of [shields](https://springrts.com/wiki/Gamedev:WeaponDefs#Shield_.28WeaponType.29).
+---
+---WARNING: perhaps, wrong information
+----
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawShield)
+---@field DrawShield fun(unitID: unitID, weaponID: weaponID, drawMode: drawMode): suppressEngineDraw: boolean
+---For unsynced menu only.
+---
+---Enables Draw{Genesis,Screen,ScreenPost} callins if true is returned, otherwise they are called once every 30 seconds.\
+---Only active when a game isn't running.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowDraw)
+---@field AllowDraw fun(): allowDraw: boolean
+---For unsynced menu only.
+---
+---Called whenever LuaMenu is on with no game loaded.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#ActivateMenu)
+---@field ActivateMenu fun()
+---For unsynced menu only.
+---
+---Called whenever LuaMenu is on with a game loaded.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#DrawInMinimap)
+---@field ActivateGame fun()
+---For Synced - Unsynced Shared
+---
+---Called when a player issues a UI command e.g. types /foo or /luarules foo.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GotChatMsg)
+---@field GotChatMsg fun(message: string, player)
+---For Synced - Unsynced Shared
+---
+---Called once to deliver the gameID.\
+---As of 101.0+ the string is encoded in hex.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GameID)
+---@field GameID fun(gameID: gameID)
+---Called when the game is paused.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GamePaused)
+---@field GamePaused fun()
+---The parameter is a table list of winning allyTeams,\
+---if empty the game result was undecided (like when dropping from an host)
+---
+---WARNING: perhaps, wrong information
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GameOver)
+---@field GameOver fun(winningAllyTeams: teamID[])
+---Called for every game simulation frame (30 per second).\
+---Starts at frame 0 in 101.0+ and 1 in previous versions.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GameFrame)
+---@field GameFrame fun(frame: uint8)
+---Called before the 0 gameframe.\
+---From 104.0 onwards, will not be called when a saved game is loaded.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GamePreload)
+---@field GamePreload fun()
+---Called upon the start of the game.\
+---From 104.0 onwards, will not be called when a saved game is loaded.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GameStart)
+---@field GameStart fun()
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#TeamChanged)
+---@field TeamChanged fun(teamID: teamID)
+---Called when a team dies (see [Spring.KillTeam](https://springrts.com/wiki/Lua_SyncedCtrl#KillTeam)).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#TeamDied)
+---@field TeamDied fun(teamID: teamID)
+---Called at the moment the unit is created.
+---
+---WARNING: perhaps, wrong information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitCreated)
+---@field UnitCreated fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, builderID: unitID)
+---Called at the moment the unit is completed.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitFinished)
+---@field UnitFinished fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---Called when a factory finishes construction of a unit.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitFromFactory)
+---@field UnitFromFactory fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, factID, factDefID, userOrders)
+---Called when a living unit becomes a nanoframe again.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitReverseBuilt)
+---@field UnitReverseBuilt fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---Called when a unit is transferred between teams.\
+---This is called after UnitTaken and in that moment unit is assigned to the newTeam
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitGiven)
+---@field UnitGiven fun(unitID: unitID, unitDefID: unitDefID, newTeam: teamID, oldTeam: teamID)
+---Called when a unit is transferred between teams.\
+---This is called before UnitGiven and in that moment unit is still assigned to the oldTeam.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitTaken)
+---@field UnitTaken fun(unitID: unitID, unitDefID: unitDefID, oldTeam: teamID, newTeam: teamID)
+---Called when a unit is damaged (after UnitPreDamaged).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitDamaged)
+---@field UnitDamaged fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, damage: number, paralyzer, weaponDefID: weaponDefID, projectileID: projectileID, attackerID: unitID, attackerDefID: unitDefID, attackerTeam: teamID)
+---Called when a unit is destroyed.
+---
+---WARNING: perhaps, wrong information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitDestroyed)
+---@field UnitDestroyed fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, attackerID: unitID, attackerDefID: unitDefID, attackerTeam: teamID)
+---Called just before a unit is invalid, after it finishes its death animation.
+---
+---New in 101.0
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#RenderUnitDestroyed)
+---@field RenderUnitDestroyed fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---Called when a unit changes its stun status.
+---
+---New in 99.0
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitStunned)
+---@field UnitStunned fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, stunned)
+---Called when two units collide. Both units must be registered with [Script.SetWatchUnit](https://springrts.com/wiki/Lua_System#SetWatchUnit).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitUnitCollision)
+---@field UnitUnitCollision fun(colliderID, collideeID)
+---Called when a unit collides with a feature. The unit must be registered with [Script.SetWatchUnit](https://springrts.com/wiki/Lua_System#SetWatchUnit) and the feature registered with [Script.SetWatchFeature](https://springrts.com/wiki/Lua_System#SetWatchFeature).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitFeatureCollision)
+---@field UnitFeatureCollision fun(colliderID, collideeID)
+---Called when a unit's harvestStorage is full (according to its unitDef's entry).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitHarvestStorageFull)
+---@field UnitHarvestStorageFull fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---Called after when a unit accepts a command, after AllowCommand returns true.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitCommand)
+---@field UnitCommand fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOpts, cmdTag)
+---Called when a unit completes a command.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitCmdDone)
+---@field UnitCmdDone fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOpts, cmdTag)
+---Called when a unit is loaded by a transport.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLoaded)
+---@field UnitLoaded fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, transportID: unitID, transportTeam: teamID)
+---Called when a unit is unloaded by a transport.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLoaded)
+---@field UnitUnloaded fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, transportID: unitID, transportTeam: teamID)
+---Called when a unit gains experience greater or equal to the minimum limit set by calling [Spring.SetExperienceGrade](https://springrts.com/wiki/Lua_SyncedCtrl#SetExperienceGrade).\
+---Should be called more reliably with small values of experience grade in 104.0+.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitExperience)
+---@field UnitExperience fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, experience: number, oldExperience: number)
+---Called when a unit is idle (empty command queue).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitIdle)
+---@field UnitIdle fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---Called when a unit cloaks.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitCloaked)
+---@field UnitCloaked fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---Called when a unit decloaks.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitDecloaked)
+---@field UnitDecloaked fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID)
+---WARNING: ??? Not implemented in base handler.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitMoved)
+---@field UnitMoved fun()
+---WARNING: ??? Not implemented in base handler.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitMoveFailed)
+---@field UnitMoveFailed fun()
+---Called when a units stockpile of weapons increases or decreases. [See stockpile](https://springrts.com/wiki/Gamedev:WeaponDefs#stockpile).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#StockpileChanged)
+---@field StockpileChanged fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, weaponNum: number, oldCount: number, newCount: number)
+---Called when a unit enters LOS of an allyteam.\
+---Its called after the unit is in LOS, so you can query that unit.\
+---The allyTeam is who's LOS the unit entered.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitEnteredLos)
+---@field UnitEnteredLos fun(unitID: unitID, unitDefID: unitDefID, allyTeam: teamID, unitDefID: unitDefID)
+---Called when a unit leaves LOS of an allyteam.\
+---For widgets, this one is called just before the unit leaves los, so you can still get the position of a unit that left los.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLeftLos)
+---@field UnitLeftLos fun(unitID: unitID, unitDefID: unitDefID, allyTeam: teamID, unitDefID: unitDefID)
+---Called when a unit enters radar of an allyteam.\
+---Also called when a unit enters LOS without any radar coverage.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitEnteredRadar)
+---@field UnitEnteredRadar fun(unitID: unitID, unitDefID: unitDefID, allyTeam: teamID, unitDefID: unitDefID)
+---Called when a unit leaves radar of an allyteam.\
+---Also called when a unit leaves LOS without any radar coverage.\
+---For widgets, this is called just after a unit leaves radar coverage, so widgets cannot get the position of units that left their radar.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLeftRadar)
+---@field UnitLeftRadar fun(unitID: unitID, unitDefID: unitDefID, allyTeam: teamID, unitDefID: unitDefID)
+---WARNING: ??? Not implemented in base handler.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitEnteredAir)
+---@field UnitEnteredAir fun()
+---WARNING: ??? Not implemented in base handler.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLeftAir)
+---@field UnitLeftAir fun()
+---WARNING: ??? Not implemented in base handler.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitEnteredWater)
+---@field UnitEnteredWater fun()
+---WARNING: ??? Not implemented in base handler.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLeftWater)
+---@field UnitLeftWater fun()
+---Called when a unit emits a seismic ping. [See seismicSignature](https://springrts.com/wiki/Gamedev:UnitDefs#seismicSignature).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitSeismicPing)
+---@field UnitSeismicPing fun(x: number, y: number, z: number, strength: number, allyTeam: teamID, unitID: unitID, unitDefID: unitDefID)
+---Called when a feature is created.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#FeatureCreated)
+---@field FeatureCreated fun(featureID: featureID, allyTeamID: teamID)
+---Called when a feature is created.
+---
+---WARNING: perhaps wrong information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#FeatureCreated)
+---@field FeatureDamaged fun(featureID: featureID, featureDefID: featureDefID, featureTeam: teamID, damage: number, weaponDefID: weaponDefID, projectileID: projectileID, attackerID: unitID, attackerDefID: unitDefID, attackerTeam: teamID)
+---Called when a feature is destroyed.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#FeatureDestroyed)
+---@field FeatureDestroyed fun(featureID: featureID, allyTeamID: teamID)
+---WARNING: not enough information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#FeatureMoved)
+---@field FeatureMoved fun()
+---Only called for weaponDefIDs registered via [Script.SetWatchWeapon](https://springrts.com/wiki/Lua_System#SetWatchWeapon).
+---
+---Called when the projectile is created.\
+---Note that weaponDefID is missing if the projectile is spawned as part of a burst, but [Spring.GetProjectileDefID](https://springrts.com/wiki/Lua_SyncedRead#GetProjectileDefID) and [Spring.GetProjectileName](https://springrts.com/wiki/Lua_SyncedRead#Projectiles) still work in callin scope using projectileID.
+---
+---WARNING: perhaps wrong information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#ProjectileCreated)
+---@field ProjectileCreated fun(projectileID: projectileID, projectileOwnerID, weaponDefID: weaponDefID?)
+---Only called for weaponDefIDs registered via [Script.SetWatchWeapon](https://springrts.com/wiki/Lua_System#SetWatchWeapon).
+---
+---Called when the projectile is destroyed.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#ProjectileCreated)
+---@field ProjectileDestroyed fun(projectileID: projectileID)
+---Called when the unit reaches an unknown command in its queue (i.e. one not handled by the engine).\
+---If no addon returns used as true the command is dropped, if an addon returns true, true the command is removed because it's done, with true, false it's kept in the queue and CommandFallback gets called again on the next slowupdate.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#CommandFallback)
+---@field CommandFallback fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOptions: table, cmdTag): used: boolean, finished: boolean
+---Called when the command is given, before the unit's queue is altered.\
+---The return value is whether it should be let into the queue.\
+---The queue remains untouched when a command is blocked, whether it would be queued or replace the queue.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowCommand)
+---@field AllowCommand fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOptions: table, cmdTag, synced): allow: boolean
+---Called just before unit is created, the boolean return value determines whether or not the creation is permitted.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowUnitCreation)
+---@field AllowUnitCreation fun(unitDefID: unitDefID, builderID: unitID, builderTeam: teamID, x: number, y: number, z: number, facing: number): allow: boolean
+---Called just before a unit is transferred to a different team, the boolean return value determines whether or not the transfer is permitted.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowUnitTransfer)
+---@field AllowUnitTransfer fun(unitID: unitID, unitDefID: unitDefID, oldTeam: teamID, newTeam: teamID, capture): allow: boolean
+---Called just before a unit progresses its build percentage, the boolean return value determines whether or not the build makes progress.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowUnitBuildStep)
+---@field AllowUnitBuildStep fun(builderID: unitID, builderTeam: teamID, unitID: unitID, unitDefID: unitDefID, part): allow: boolean
+---Called just before feature is created, the boolean return value determines whether or not the creation is permitted.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowFeatureCreation)
+---@field AllowFeatureCreation fun(featureDefID: featureDefID, teamID: teamID, x: number, y: number, z: number): allow: boolean
+---Called just before a feature changes its build percentage, the boolean return value determines whether or not the change is permitted.\
+---Note that this is also called for resurrecting features, and for refilling features with resources before resurrection.\
+---On reclaim the part values are negative, and on refill and ressurect they are positive.\
+---Part is the percentage the feature be built or reclaimed per frame.\
+---Eg. for a 30 workertime builder, that's a build power of 1 per frame.\
+---For a 50 buildtime feature reclaimed by this builder, part will be 100/-50(/1) = -2%, or -0.02 numerically.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowFeatureBuildStep)
+---@field AllowFeatureBuildStep fun(builderID: unitID, builderTeam: teamID, featureID: featureID, featureDefID: featureDefID, part): allow: boolean
+---Called when a team sets the sharing level of a resource, the boolean return value determines whether or not the sharing level is permitted.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowResourceLevel)
+---@field AllowResourceLevel fun(teamID: teamID, res, level: number): allow: boolean
+---Called just before resources are transferred between players, the boolean return value determines whether or not the transfer is permitted.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowResourceTransfer)
+---@field AllowResourceTransfer fun(oldTeamID: teamID, newTeamID: teamID, res, amount: number): allow: boolean
+---Called just before resources are transferred between players, the boolean return value determines whether or not the transfer is permitted.
+---
+---NB: The order of the parameters changed with the addition of teamID in 104.0. Previouly it was: clampedX, clampedY, clampedZ, playerID, readyState, rawX, rawY, rawZ\
+---New in version 95.0 the default 'failed to choose' start-position is the north-west point of their startbox, or (0,0,0) if they do not have a startbox.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowStartPosition)
+---@field AllowStartPosition fun(playerID: playerID, teamID: teamID, readyState: AllowStartPosition.readyState, clampedX: number, clampedY: number, clampedZ: number, rawX: number, rawY: number, rawZ: number): allow: boolean
+---Determines if this unit can be controlled directly in FPS view.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowDirectUnitControl)
+---@field AllowDirectUnitControl fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, playerID: playerID): allow: boolean
+---Determines if this weapon can automatically generate targets itself.\
+---See also [commandFire](https://springrts.com/wiki/Gamedev:WeaponDefs#commandFire) weaponDef tag.\
+---The ignoreCheck return value was added in 99.0 to allow ignoring the callin i.e. running normal engine check for this weapon.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowWeaponTargetCheck)
+---@field AllowWeaponTargetCheck fun(attackerID: number, attackerWeaponNum: number, attackerWeaponDefID: weaponDefID): allowCheck: boolean, ignoreCheck: boolean
+---Controls blocking of a specific target from being considered during a weapon's periodic auto-targeting sweep.\
+---The second return value is the new priority for this target (if you don't want to change it, return defPriority).\
+---Lower priority targets are targeted first.
+---
+---WARNING: perhaps wrong information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowWeaponTarget)
+---@field AllowWeaponTarget fun(attackerID: unitID, targetID: unitID, attackerWeaponNum: number, attackerWeaponDefID: weaponDefID, defPriority): allowed: boolean
+---Called when a construction unit wants to "use his nano beams".
+---
+---New in 98.0 [5a82d750](https://github.com/spring/spring/commit/5a82d750b89e72024bb0bb62cf05ea257737e0ac)
+---
+---action is one of following:
+---```txt
+----1 Build
+---CMD.REPAIR Repair
+---CMD.RECLAIM Reclaim
+---CMD.RESTORE Restore
+---CMD.RESURRECT Resurrect
+---CMD.CAPTURE Capture
+---```
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowBuilderHoldFire)
+---@field AllowBuilderHoldFire fun(unitID: unitID, unitDefID: unitDefID, action: AllowBuilderHoldFire.action): actionAllowed: boolean
+---Called when an explosion occurs.\
+---If it returns true then no graphical effects are drawn by the engine for this explosion.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#Explosion)
+---@field Explosion fun(weaponDefID: weaponDefID, px: number, py: number, pz: number, AttackerID: unitID, ProjectileID: projectileID): noGfx: boolean
+---Called when pre-building terrain levelling terraforms are completed (c.f. [levelGround](https://springrts.com/wiki/Gamedev:UnitDefs#levelGround)).\
+---If the return value is true the current build order is terminated.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#TerraformComplete)
+---@field TerraformComplete fun(unitID: unitID, unitDefID: unitDefID, unitTeam: unitID, buildUnitID: unitID, buildUnitDefID: unitDefID, buildUnitTeam: teamID): stop: boolean
+---Enable both [Spring.MoveCtrl.SetCollideStop](https://springrts.com/wiki/Lua_MoveCtrl#SetCollideStop) and [Spring.MoveCtrl.SetTrackGround](https://springrts.com/wiki/Lua_MoveCtrl#SetTrackGround) to enable this call-in, data was supposed to indicate the type of notification but currently never has a value other than 1 ("unit hit the ground").\
+---The return value determines whether or not the unit should remain script-controlled (false) or return to engine controlled movement (true).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#MoveCtrlNotify)
+---@field MoveCtrlNotify fun(unitID: unitID, unitDefID: unitDefID, unitTeam: unitID, data): moveCtrlComplete: boolean
+---Receives messages from unsynced sent via [Spring.SendLuaRulesMsg](https://springrts.com/wiki/Lua_UnsyncedCtrl#SendLuaRulesMsg) or [Spring.SendLuaUIMsg](https://springrts.com/wiki/Lua_UnsyncedCtrl#SendLuaUIMsg).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#RecvLuaMsg)
+---@field RecvLuaMsg fun(message: string, playerID: playerID)
+---Called after GamePreload and before GameStart. [See Lua_SaveLoad](https://springrts.com/wiki/Lua_SaveLoad#Load_.28_zip_.29_-.3E_nil).
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#Load)
+---@field Load fun(zip: zip)
+---Called before damage is applied to the unit, allows fine control over how much damage and [impulse](http://en.wikipedia.org/wiki/Impulse_(physics)) is applied.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitPreDamaged)
+---@field UnitPreDamaged fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, damage: number, paralyzer, weaponDefID: PreDamaged.weaponDefID, projectileID: projectileID, attackerID: unitID, attackerDefID: unitDefID, attackerTeam: unitID): newDamage: number, impulseMult: number
+---Called before any engine shield-vs-projectile logic executes.\
+---If the return value is true the gadget handles the collision event and the engine does not remove the projectile.\
+---If the weapon is a hitscan type ([BeamLaser](https://springrts.com/wiki/Gamedev:WeaponDefs#Tag:weaponType) or [LightningCanon](https://springrts.com/wiki/Gamedev:WeaponDefs#Tag:weaponType)) then projectileID is nil and beamEmitterWeaponNum and beamEmitterUnitID are populated instead.\
+---The start and hit position arguments are provided from 104.0 onwards.
+---
+---WARNING: perhaps, wrong information.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#ShieldPreDamaged)
+---@field ShieldPreDamaged fun(projectileID: projectileID?, shieldCarrier, boolBounceProjectile: boolean, beamEmitterWeaponNum: number?, beamEmitterUnitID: number?, startX: number, startY: number, startZ: number, hitX: number, hitY: number, hitZ: number): handleCollision: boolean
+---Called before damage is applied to the feature, allows fine control over how much damage and [impulse](http://en.wikipedia.org/wiki/Impulse_(physics)) is applied.
+---
+---[Wiki](https://springrts.com/wiki/Lua:Callins#FeaturePreDamaged)
+---@field FeaturePreDamaged fun(featureID: featureID, featureDefID: featureDefID, featureTeam: teamID, damage: number, weaponDefID: PreDamaged.weaponDefID, projectileID: projectileID, attackerID: unitID, attackerDefID: unitDefID, attackerTeam: teamID): newDamage: number, impulseMult: number
+
+
+---WARNING: probably, wrong information!!
+---[Wiki](https://springrts.com/wiki/Lua:Callins#GetTooltip)
+---@class GetTooltip.mods
+---@field alt   boolean
+---@field ctrl  boolean
+---@field meta  boolean
+---@field shift boolean
+
+
+---@alias drawMode
+---| 0 # (notDrawing)
+---| 1 # (normalDraw)
+---| 2 # (shadowDraw)
+---| 3 # (reflectionDraw)
+---| 4 # (refractionDraw)
+---| 5 # (gameDeferredDraw)
+
+
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowStartPosition)
+---@alias AllowStartPosition.readyState
+---| 0 # Player picked a position,
+---| 1 # Player clicked ready,
+---| 2 # Player pressed ready OR the game was force-started (player did not click ready, but is now forcibly readied) or
+---| 3 # Player failed to load.
+
+
+---```txt
+----1 Build
+---CMD.REPAIR Repair
+---CMD.RECLAIM Reclaim
+---CMD.RESTORE Restore
+---CMD.RESURRECT Resurrect
+---CMD.CAPTURE Capture
+---```
+---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowBuilderHoldFire)
+---@alias AllowBuilderHoldFire.action
+---| -1 # Build
+---| CMDTYPE
+
+
+---@alias PreDamaged.weaponDefID
+---| 1 # debris collision, also default of [Spring.AddUnitDamage](https://springrts.com/wiki/Lua_SyncedCtrl#AddUnitDamage)
+---| 2 # ground collision
+---| 3 # object collision
+---| 4 # fire damage
+---| 5 # water damage
+---| 6 # kill damage
+---| 7 # crush damage
