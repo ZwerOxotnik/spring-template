@@ -88,7 +88,7 @@ CMD = CMD
 
 
 ---[View documents](https://springrts.com/wiki/Lua_ConstGL)
----@class CMDTYPE: uint
+---@class CMDTYPE: int
 
 ---@class CMDoption:   CMDTYPE
 ---@class CMDwaitcode: CMDTYPE

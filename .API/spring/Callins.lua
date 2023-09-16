@@ -424,11 +424,11 @@
 ---Called after when a unit accepts a command, after AllowCommand returns true.
 ---
 ---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitCommand)
----@field UnitCommand fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOpts, cmdTag)
+---@field UnitCommand fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOpts: table, cmdTag: int)
 ---Called when a unit completes a command.
 ---
 ---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitCmdDone)
----@field UnitCmdDone fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOpts, cmdTag)
+---@field UnitCmdDone fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOpts: table, cmdTag: int)
 ---Called when a unit is loaded by a transport.
 ---
 ---[Wiki](https://springrts.com/wiki/Lua:Callins#UnitLoaded)
@@ -545,13 +545,13 @@
 ---If no addon returns used as true the command is dropped, if an addon returns true, true the command is removed because it's done, with true, false it's kept in the queue and CommandFallback gets called again on the next slowupdate.
 ---
 ---[Wiki](https://springrts.com/wiki/Lua:Callins#CommandFallback)
----@field CommandFallback fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOptions: table, cmdTag): used: boolean, finished: boolean
+---@field CommandFallback fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOptions: table, cmdTag: int): used: boolean, finished: boolean
 ---Called when the command is given, before the unit's queue is altered.\
 ---The return value is whether it should be let into the queue.\
 ---The queue remains untouched when a command is blocked, whether it would be queued or replace the queue.
 ---
 ---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowCommand)
----@field AllowCommand fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOptions: table, cmdTag, synced): allow: boolean
+---@field AllowCommand fun(unitID: unitID, unitDefID: unitDefID, unitTeam: teamID, cmdID: CMDTYPE, cmdParams: table, cmdOptions: table, cmdTag: int, synced): allow: boolean
 ---Called just before unit is created, the boolean return value determines whether or not the creation is permitted.
 ---
 ---[Wiki](https://springrts.com/wiki/Lua:Callins#AllowUnitCreation)
